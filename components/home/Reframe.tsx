@@ -62,7 +62,7 @@ export function Reframe() {
           </ButtonLink>
           <ButtonLink
             href="/partners/distributor/evidence"
-            variant="link-dark"
+            variant="ghost-dark"
           >
             See the evidence →
           </ButtonLink>

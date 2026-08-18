@@ -51,7 +51,7 @@ export function BoogieWoogieStrip() {
               <ButtonLink href="/boogie-woogie" variant="ghost">
                 See the range
               </ButtonLink>
-              <ButtonLink href="/partners/franchise" variant="link">
+              <ButtonLink href="/partners/franchise" variant="ghost">
                 Open a franchise →
               </ButtonLink>
             </div>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
+import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { DripEdge } from '@/components/ui/DripEdge';
 import { Ticker } from '@/components/ui/Ticker';
@@ -70,18 +70,10 @@ export function HeroDual() {
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/partners/distributor"
-                className="chip bg-brand-brown px-7 py-4 text-paper transition-transform hover:-translate-y-0.5 hover:bg-berry"
-              >
-                Become a distributor
-              </Link>
-              <Link
-                href="/find-boogies"
-                className="chip border border-brand-brown/25 px-7 py-4 text-brand-brown transition-transform hover:-translate-y-0.5 hover:border-brand-brown"
-              >
+              <ButtonLink href="/partners/distributor">Become a distributor</ButtonLink>
+              <ButtonLink href="/find-boogies" variant="ghost">
                 Find Boogies near you
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 

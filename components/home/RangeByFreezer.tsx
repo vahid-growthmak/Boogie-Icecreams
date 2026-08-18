@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { DripEdge } from '@/components/ui/DripEdge';
 import { Reveal } from '@/components/ui/Reveal';
@@ -90,12 +91,9 @@ export function RangeByFreezer() {
         </ul>
 
         <Reveal className="mt-12 flex justify-center">
-          <Link
-            href="/products"
-            className="chip border border-brand-brown/25 px-7 py-4 text-brand-brown transition-transform hover:-translate-y-0.5 hover:border-brand-brown"
-          >
+          <ButtonLink href="/products" variant="ghost">
             See the full catalogue
-          </Link>
+          </ButtonLink>
         </Reveal>
       </Container>
 

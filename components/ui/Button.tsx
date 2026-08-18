@@ -22,7 +22,14 @@ import { cn } from '@/lib/cn';
  * colour a call site needs is a variant, never an override.
  */
 
-type Variant = 'primary' | 'ghost' | 'link' | 'accent' | 'contrast' | 'link-dark';
+type Variant =
+  | 'primary'
+  | 'ghost'
+  | 'ghost-dark'
+  | 'link'
+  | 'accent'
+  | 'contrast'
+  | 'link-dark';
 
 const base =
   'inline-flex items-center justify-center gap-2 rounded-chip font-round text-body leading-none ' +
@@ -30,7 +37,7 @@ const base =
   'disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-brand-brown px-7 py-4 text-paper hover:bg-berry',
+  primary: 'border border-transparent bg-brand-brown px-7 py-4 text-paper hover:bg-berry',
   ghost:
     'border border-brand-brown/25 px-7 py-4 text-brand-brown hover:border-brand-brown',
   /* Two things here. The 48px touch target is an invisible ::after box rather
@@ -41,9 +48,14 @@ const variants: Record<Variant, string> = {
   link:
     'self-start relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-brand-brown/35 px-0 pb-1 text-brand-brown hover:border-brand-brown hover:translate-y-0',
   /* On a brown ground. */
-  accent: 'bg-berry px-7 py-4 text-paper hover:bg-cream hover:text-brand-brown',
+  accent: 'border border-transparent bg-berry px-7 py-4 text-paper hover:bg-cream hover:text-brand-brown',
+  /* The outlined pill for dark grounds — pairs with `accent` the way `ghost`
+     pairs with `primary`, so a secondary CTA is the same shape and size as the
+     button beside it and differs only in weight. */
+  'ghost-dark':
+    'border border-paper/35 px-7 py-4 text-paper hover:border-paper hover:bg-paper hover:text-brand-brown',
   /* On a berry or brown ground — inverts to the cream pill. */
-  contrast: 'bg-cream px-7 py-4 text-brand-brown hover:bg-brand-brown hover:text-paper',
+  contrast: 'border border-transparent bg-cream px-7 py-4 text-brand-brown hover:bg-brand-brown hover:text-paper',
   'link-dark':
     'self-start relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-berry/50 px-0 pb-1 text-berry hover:border-berry hover:translate-y-0',
 };

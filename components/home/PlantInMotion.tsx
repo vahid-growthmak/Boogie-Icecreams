@@ -54,7 +54,7 @@ export function PlantInMotion() {
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/plant/visit">Book a plant visit</ButtonLink>
-              <ButtonLink href="/plant" variant="link">
+              <ButtonLink href="/plant" variant="ghost">
                 What we make it on →
               </ButtonLink>
             </div>
