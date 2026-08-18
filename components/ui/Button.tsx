@@ -25,7 +25,7 @@ import { cn } from '@/lib/cn';
 type Variant = 'primary' | 'ghost' | 'link' | 'accent' | 'contrast' | 'link-dark';
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-chip font-round text-caption leading-none ' +
+  'inline-flex items-center justify-center gap-2 rounded-chip font-round text-body leading-none ' +
   'transition-[color,background-color,border-color,transform] hover:-translate-y-0.5 ' +
   'disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0';
 

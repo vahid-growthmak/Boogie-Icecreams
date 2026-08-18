@@ -108,8 +108,14 @@
     background-color: var(--color-cream);
     color: var(--color-brand-brown-soft);
     font-family: var(--font-sans);
-    font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
+    /* MUST stay at the browser default. Setting this to --text-body (0.9375rem)
+       made the root 15px, so every rem in the system — the whole type scale AND
+       every spacing utility — rendered 6.25% smaller than it was authored.
+       --text-caption arrived as 12.19px instead of 13px, --text-body-lead as
+       15.94px instead of 17px, and body copy sat at 12px in several places.
+       The scale is authored against a 16px root; the base size belongs on body,
+       where it does not rescale rem for everything else. */
+    font-size: 100%;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
     /* Header is sticky; anchored sections must not hide beneath it. */
@@ -118,6 +124,8 @@
 
   body {
     min-height: 100dvh;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
     /* Nothing may create horizontal scroll — offset collage blocks are clipped. */
     overflow-x: hidden;
   }

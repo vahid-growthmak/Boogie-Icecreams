@@ -54,7 +54,7 @@ export function PartnerMenu({ className }: { className?: string }) {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 font-round text-caption text-brand-brown/80 transition-colors hover:text-berry"
+        className="inline-flex items-center gap-1.5 font-round text-body text-brand-brown/85 transition-colors hover:text-berry"
       >
         Partner With Us
         <Chevron className={cn('size-3.5 transition-transform', open && 'rotate-180')} />

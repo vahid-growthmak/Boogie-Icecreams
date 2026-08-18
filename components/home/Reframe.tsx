@@ -36,9 +36,9 @@ export function Reframe() {
 
         <div className="mt-14 grid grid-cols-1 gap-4 lg:mt-16 lg:grid-cols-2">
           <Reveal className="rounded-card bg-paper/8 p-8 lg:p-10">
-            <span className="chip bg-paper/10 text-paper/60">Read one way</span>
-            <p className="mt-6 font-round text-h2 text-paper/55">A problem.</p>
-            <p className="mt-4 max-w-md text-body text-paper/55">
+            <span className="chip bg-paper/15 text-paper">Read one way</span>
+            <p className="mt-6 font-round text-h2 text-paper">A problem.</p>
+            <p className="mt-4 max-w-md text-body text-paper">
               No consumer pull behind the product, and the distributor is the one being asked to
               underwrite that risk with his own capital.
             </p>

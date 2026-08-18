@@ -58,7 +58,7 @@ export function RangeByFreezer() {
 
                 <span className="min-w-0 flex-1">
                   <span className="block font-round text-h3 text-brand-brown">{tier.label}</span>
-                  <span className="mt-1 block text-caption text-brand-brown-soft">{tier.role}</span>
+                  <span className="mt-1 block text-body text-brand-brown-soft">{tier.role}</span>
                 </span>
 
                 <span className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-20">

@@ -37,7 +37,7 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-round text-caption text-brand-brown/80 transition-colors hover:text-berry"
+                  className="font-round text-body text-brand-brown/85 transition-colors hover:text-berry"
                 >
                   {item.label}
                 </Link>

@@ -38,11 +38,11 @@ export function Footer() {
 
           {FOOTER_COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
-              <h2 className="font-round text-caption text-berry">{column.heading}</h2>
+              <h2 className="font-round text-h3 text-berry">{column.heading}</h2>
               <ul className="mt-5 flex list-none flex-col gap-3">
                 {column.links.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-caption text-paper/75 transition-colors hover:text-berry">
+                    <Link href={link.href} className="text-body text-paper/80 transition-colors hover:text-berry">
                       {link.label}
                     </Link>
                   </li>
@@ -52,17 +52,17 @@ export function Footer() {
           ))}
 
           <div>
-            <h2 className="font-round text-caption text-berry">Contact &amp; Legal</h2>
+            <h2 className="font-round text-h3 text-berry">Contact &amp; Legal</h2>
             <ul className="mt-5 flex list-none flex-col gap-3">
               <li>
-                <Link href="/contact" className="text-caption text-paper/75 transition-colors hover:text-berry">
+                <Link href="/contact" className="text-body text-paper/80 transition-colors hover:text-berry">
                   Contact
                 </Link>
               </li>
               <li>
                 <a
                   href={`mailto:${CONTACT.partnerEmail}`}
-                  className="text-caption text-paper/75 transition-colors hover:text-berry"
+                  className="text-body text-paper/80 transition-colors hover:text-berry"
                 >
                   {CONTACT.partnerEmail}
                 </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-                    className="text-caption text-paper/75 transition-colors hover:text-berry"
+                    className="text-body text-paper/80 transition-colors hover:text-berry"
                   >
                     {CONTACT.phone}
                   </a>
@@ -81,7 +81,7 @@ export function Footer() {
               )}
               {LEGAL.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-caption text-paper/75 transition-colors hover:text-berry">
+                  <Link href={link.href} className="text-body text-paper/80 transition-colors hover:text-berry">
                     {link.label}
                   </Link>
                 </li>
