@@ -18,7 +18,9 @@ tsconfig.tsbuildinfo
 # Visual-QA captures are regenerable: npm run test:e2e
 /tests/e2e/shots/
 
-# Design reference screenshots and raw generation output — kept on disk, not in
-# git. The processed assets the site actually serves live in public/images/.
+# Raw generation output and the 50MB source captures stay on disk, not in git.
+# The reference captures themselves ARE tracked, converted to WebP at the same
+# pixel dimensions — see reference/README.md. The processed assets the site
+# actually serves live in public/images/.
 /generated Boogie/
 /*-08-17-2026_*.png
