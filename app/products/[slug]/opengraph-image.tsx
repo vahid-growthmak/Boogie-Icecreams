@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 import { getAllProducts, getProductBySlug } from '@/lib/catalog';
 
-export const alt = 'Boogie Ice Creams';
+export const alt = 'Boogies Ice Cream';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -37,7 +37,7 @@ export default async function ProductOpengraphImage({
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ fontSize: 84, color: '#7C1F45', display: 'flex', lineHeight: 1.05 }}>
-            {product?.name ?? 'Boogie Ice Creams'}
+            {product?.name ?? 'Boogies Ice Cream'}
           </div>
           <div
             style={{

@@ -39,7 +39,7 @@ export function BestSellersCarousel({
 
   return (
     <>
-      <div className="relative mb-14 flex items-center justify-center">
+      <div className="relative mb-10 flex items-center justify-center">
         <h2 className="text-h2">{heading}</h2>
         <div className="absolute right-0 hidden gap-2 sm:flex">
           <IconButton label="Previous flavours" onClick={() => scrollBy(-1)}>

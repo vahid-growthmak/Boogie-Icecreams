@@ -1,17 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { AddToCartButton } from '@/components/product/AddToCartButton';
 import { defaultVariant } from '@/lib/catalog';
 import { formatPrice } from '@/lib/format';
 import type { Product } from '@/lib/schema';
 
 /**
- * Server component. Only the quick-add is client code, and it receives four
- * primitives rather than the Product — the catalog never crosses the boundary.
+ * Server component, and now entirely so — the quick-add was removed with the
+ * rest of the direct-purchase surface. The strategy document states the consumer
+ * "cannot buy direct"; a basket button here pointed at a transaction the
+ * business does not offer.
  *
- * Hover scales the image 1.03 and moves nothing else. The button is always
- * visible on touch, where there is no hover to reveal it.
+ * Hover scales the image 1.03 and moves nothing else.
  */
 export function ProductCard({
   product,
@@ -72,26 +72,7 @@ export function ProductCard({
           <span className="text-cocoa-60"> · {variant.size}</span>
         </p>
 
-        <div className="mt-4 opacity-100 transition-opacity lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100">
-          <AddToCartButton
-            sku={variant.sku}
-            variant="ghost"
-            disabled={soldOut}
-            label={soldOut ? 'Sold out' : 'Quick add'}
-            accessibleName={
-              soldOut
-                ? `${product.name} is sold out in ${variant.size}`
-                : `Add ${product.name}, ${variant.size}, to cart`
-            }
-            item={{
-              name: product.name,
-              size: variant.size,
-              price: variant.price,
-              category: product.category,
-            }}
-            className="px-6 py-3"
-          />
-        </div>
+        <p className="eyebrow mt-4 text-mulberry">View specification →</p>
       </div>
     </article>
   );

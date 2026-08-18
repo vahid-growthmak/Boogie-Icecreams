@@ -2,12 +2,10 @@ import type { Metadata } from 'next';
 import { Fraunces, Hanken_Grotesk } from 'next/font/google';
 import Script from 'next/script';
 
-import { CartDrawerMount } from '@/components/cart/CartDrawerMount';
-import { CartIndexProvider } from '@/components/cart/CartIndexProvider';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { buildCartIndex } from '@/lib/catalog';
+import { PinnedContact } from '@/components/ui/PinnedContact';
 import { SITE_DESCRIPTION, SITE_NAME, organizationJsonLd, siteUrl, websiteJsonLd } from '@/lib/seo';
 
 import './globals.css';
@@ -46,8 +44,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Built on the server; display data only. Keeps content/ out of the client bundle.
-  const cartIndex = buildCartIndex();
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
@@ -60,12 +56,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
 
-        <CartIndexProvider index={cartIndex}>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <CartDrawerMount />
-        </CartIndexProvider>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        {/* Sitemap §1.12 — sitewide floating conversion path. */}
+        <PinnedContact />
 
         {gaId && (
           <>

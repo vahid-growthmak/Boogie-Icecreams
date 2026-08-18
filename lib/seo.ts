@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { toDecimalString } from '@/lib/format';
 import type { Product, Variant } from '@/lib/schema';
 
-export const SITE_NAME = 'Boogie Ice Creams';
+export const SITE_NAME = 'Boogies Ice Cream';
 export const SITE_DESCRIPTION =
   'Small-batch ice cream, sorbet and frozen desserts, churned slow and sold by the tub. Delivered in insulated packaging across India.';
 
@@ -51,6 +51,7 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: siteUrl(),
+    logo: absoluteUrl('/images/brand/boogies.webp'),
     description: SITE_DESCRIPTION,
     // No award, certification or founding date is asserted here. Nothing goes in
     // this object that the client has not confirmed. PRD §10.

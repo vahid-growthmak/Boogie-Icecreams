@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Boogie Ice Creams — design tokens. PRD §4.2–4.6.
+/* Boogies Ice Cream — design tokens. PRD §4.2–4.6.
  * The single source of design truth. No component may introduce a literal
  * colour, size or spacing value. See .agents/skills/boogie-design-system.
  */
@@ -78,7 +78,7 @@
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
     /* Header is sticky; anchored sections must not hide beneath it. */
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 7rem;
   }
 
   body {

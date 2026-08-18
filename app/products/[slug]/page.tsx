@@ -1,18 +1,18 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { BuyControls } from '@/components/product/BuyControls';
 import { Gallery } from '@/components/product/Gallery';
 import { NutritionTable } from '@/components/product/NutritionTable';
 import { ProductCard } from '@/components/product/ProductCard';
 import { ViewItem } from '@/components/product/ViewItem';
 import { Accordion, AccordionItem } from '@/components/ui/Accordion';
+import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { Reveal } from '@/components/ui/Reveal';
 import { defaultVariant, getAllProducts, getProductBySlug, getRelated } from '@/lib/catalog';
+import { formatPrice } from '@/lib/format';
 import { CATEGORY_LABELS } from '@/lib/schema';
 import { breadcrumbJsonLd, buildProductMetadata, productJsonLd } from '@/lib/seo';
 
@@ -33,6 +33,25 @@ export async function generateMetadata({
   return buildProductMetadata(product, defaultVariant(product));
 }
 
+/**
+ * Sitemap page 4 — SKU Detail.
+ *
+ *   4.2  Breadcrumb .............. BreadcrumbList schema
+ *   4.3  Product hero ............ real packshot, correct spelling
+ *   4.4  Specification table ..... "The reason this page exists"
+ *   4.5  Band and margin context . where the line sits on the ladder
+ *   4.6  Related lines ........... weighted by band before format
+ *   4.7  Exclusivity flag ........ conditional on the CMS flag
+ *
+ * The buy panel is gone. The strategy document is unambiguous that the consumer
+ * "cannot buy direct" and is a supporting audience — a cart on this page pointed
+ * at a transaction the business does not do. The page now converts to a trade
+ * conversation, which is the transaction it does do.
+ *
+ * §4.4 note: "Omit any field not verified rather than estimating." Case
+ * configuration, shelf life and MOQ are not in the catalogue data, so they are
+ * absent rather than guessed — which is also why the trade pack exists.
+ */
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
@@ -40,10 +59,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const primary = defaultVariant(product);
   const related = getRelated(product, 4);
-  const storyImage = product.images[1] ?? product.images[0];
-
-  // Allergens are open by default when the product declares any, so the block is
-  // readable with JavaScript disabled. PRD §5.3 acceptance criteria.
   const openByDefault = ['ingredients', ...(product.allergens.length > 0 ? ['allergens'] : [])];
 
   return (
@@ -59,6 +74,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         }}
       />
 
+      {/* --- 4.2 Breadcrumb ------------------------------------------------- */}
       <Container className="pt-8">
         <nav aria-label="Breadcrumb">
           <ol className="flex list-none flex-wrap items-center gap-2 text-caption text-cocoa-60">
@@ -70,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <li aria-hidden="true">/</li>
             <li>
               <Link href="/products" className="hover:text-mulberry">
-                Our products
+                Products
               </Link>
             </li>
             <li aria-hidden="true">/</li>
@@ -81,7 +97,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </nav>
       </Container>
 
-      {/* Gallery 7 / buy panel 5 */}
+      {/* --- 4.3 Product hero + 4.4 Specification --------------------------- */}
       <section className="pt-8 pb-20 lg:pt-12 lg:pb-28">
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
@@ -94,16 +110,54 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <h1 className="mt-4 text-display-l">{product.name}</h1>
               <p className="mt-5 text-body-lead text-mulberry">{product.strapline}</p>
 
-              <BuyControls
-                variants={product.variants}
-                productName={product.name}
-                category={product.category}
-              />
+              {/* 4.7 Exclusivity flag — renders only when the CMS flag is set. */}
+              {product.exclusive && (
+                <p className="mt-6 border-l-2 border-gold bg-sand/60 px-5 py-4 text-body text-cocoa">
+                  <strong className="font-semibold text-mulberry">Exclusive line.</strong> Not
+                  available to general retail — stocked only through Boogies outlets and
+                  franchises.
+                </p>
+              )}
 
-              <p className="mt-5 text-caption text-cocoa-60">
-                Tubs travel packed in insulated boxes with dry ice. Delivery days and cut-off times
-                are confirmed at checkout.
-              </p>
+              {/* 4.4 Specification table. Verified fields only. */}
+              <div className="mt-10">
+                <h2 className="eyebrow text-cocoa-60">Specification</h2>
+                <dl className="mt-4 divide-y divide-cocoa/10 border-y border-cocoa/10">
+                  {product.variants.map((variant) => (
+                    <div key={variant.sku} className="flex items-baseline justify-between py-3">
+                      <dt className="text-body text-cocoa">{variant.size}</dt>
+                      <dd className="text-body text-cocoa">
+                        {formatPrice(variant.price)}
+                        <span className="ml-3 text-caption text-cocoa-60">{variant.sku}</span>
+                      </dd>
+                    </div>
+                  ))}
+                  <div className="flex items-baseline justify-between py-3">
+                    <dt className="text-body text-cocoa">Storage</dt>
+                    <dd className="text-body text-cocoa">−18°C</dd>
+                  </div>
+                </dl>
+                <p className="mt-3 text-caption text-cocoa-60">
+                  Case configuration, shelf life and minimum order are confirmed in the trade pack
+                  rather than estimated here.
+                </p>
+              </div>
+
+              {/* 4.5 Band and margin context. */}
+              <div className="mt-10 bg-sand/50 p-6">
+                <h2 className="text-h3">Where this sits on the ladder</h2>
+                <p className="mt-3 text-body text-cocoa">
+                  A line is worth carrying for what it returns per unit moved, not for what it
+                  tastes like. The trade pack places this SKU against the rest of the band so the
+                  comparison is in rupees rather than in adjectives.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <ButtonLink href="/products">Request the trade pack</ButtonLink>
+                  <ButtonLink href="/partners/distributor" variant="ghost">
+                    Enquire about this line
+                  </ButtonLink>
+                </div>
+              </div>
 
               <div className="mt-12">
                 <Accordion defaultValue={openByDefault}>
@@ -118,26 +172,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         <strong className="font-semibold text-mulberry">
                           {product.allergens.join(', ').toLowerCase()}
                         </strong>
-                        . Made in a kitchen that also handles milk, eggs, nuts and gluten.
+                        .
                       </p>
                     ) : (
-                      <p>
-                        No declared allergens in the recipe. Made in a kitchen that also handles
-                        milk, eggs, nuts and gluten.
-                      </p>
+                      <p>No declared allergens in the recipe.</p>
                     )}
                   </AccordionItem>
 
                   <AccordionItem value="nutrition" title="Nutrition">
                     <NutritionTable nutrition={product.nutritionPer100g} />
-                  </AccordionItem>
-
-                  <AccordionItem value="storage" title="Storage">
-                    <p>
-                      Keep frozen at −18°C. Once opened, eat within a week. There are no
-                      stabilisers in this, so let it stand ten minutes before scooping and do not
-                      refreeze once it has softened through.
-                    </p>
                   </AccordionItem>
                 </Accordion>
               </div>
@@ -146,38 +189,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </Container>
       </section>
 
-      {product.story && storyImage && (
-        <section className="section-y bg-sand/50">
-          <Container>
-            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-              <Reveal className="lg:col-span-6">
-                <h2 className="text-h2">The flavour</h2>
-                <p className="mt-6 text-body-lead text-mulberry">{product.description}</p>
-                <p className="mt-5 text-body text-cocoa">{product.story}</p>
-                <p className="mt-8 text-caption text-cocoa-60">
-                  {product.flavourNotes.join(' · ')}
-                </p>
-              </Reveal>
-              <Reveal className="lg:col-span-6" delayIndex={1}>
-                <div className="relative aspect-4/5">
-                  <Image
-                    src={storyImage.src}
-                    alt={storyImage.alt}
-                    fill
-                    sizes="(min-width:1024px) 50vw, 92vw"
-                    className="object-contain p-10"
-                  />
-                </div>
-              </Reveal>
-            </div>
-          </Container>
-        </section>
-      )}
-
+      {/* --- 4.6 Related lines ---------------------------------------------- */}
       {related.length > 0 && (
-        <section className="section-y">
+        <section className="section-y bg-sand/40">
           <Container>
-            <h2 className="mb-14 text-center text-h2">You may also like</h2>
+            <h2 className="mb-14 text-h2">Other lines in the range</h2>
             <ul className="grid list-none grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">
               {related.map((item, i) => (
                 <Reveal as="li" key={item.slug} delayIndex={i}>

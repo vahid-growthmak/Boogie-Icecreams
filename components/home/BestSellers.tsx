@@ -13,7 +13,7 @@ import type { Product } from '@/lib/schema';
  */
 export function BestSellers({ products }: { products: Product[] }) {
   return (
-    <section className="section-y bg-sand/50">
+    <section className="bg-sand/50 py-20 lg:py-28">
       <Container>
         <BestSellersCarousel heading="Best sellers">
           {products.map((product) => (
@@ -45,7 +45,7 @@ export function BestSellers({ products }: { products: Product[] }) {
           ))}
         </BestSellersCarousel>
 
-        <Reveal className="mt-16 flex justify-center">
+        <Reveal className="mt-14 flex justify-center">
           <ButtonLink href="/products">View collection</ButtonLink>
         </Reveal>
       </Container>

@@ -14,10 +14,11 @@ export function Hero({ product }: { product: Product }) {
   const image = product.images[0];
 
   return (
-    <section className="pt-12 pb-20 lg:pt-16 lg:pb-32">
+    <section className="pt-10 pb-16 lg:pt-14 lg:pb-24">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
+            <p className="eyebrow mb-6 text-cocoa-60">Ice cream · Sorbet · Dairy free</p>
             <h1 className="text-display-l">
               Small batch.
               <br />
@@ -41,7 +42,7 @@ export function Hero({ product }: { product: Product }) {
 
           <div className="relative lg:col-span-7">
             <div className="relative isolate mx-auto flex aspect-square max-w-2xl items-center justify-center">
-              <PetalParallax className="left-[6%] w-[88%]" />
+              <PetalParallax className="left-[10%] w-[82%]" />
               {image && (
                 <Image
                   src={image.src}
@@ -51,7 +52,7 @@ export function Hero({ product }: { product: Product }) {
                   priority
                   fetchPriority="high"
                   sizes="(min-width:1024px) 56vw, 92vw"
-                  className="relative w-[72%] -rotate-12 object-contain"
+                  className="relative w-[86%] -translate-y-4 -rotate-6 object-contain"
                 />
               )}
             </div>

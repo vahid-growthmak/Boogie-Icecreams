@@ -1,75 +1,104 @@
 import Link from 'next/link';
 
 import { Container } from '@/components/ui/Container';
-import { Wordmark } from '@/components/ui/Wordmark';
-
-const NAV = [
-  { href: '/#story', label: 'Our story' },
-  { href: '/products', label: 'Our products' },
-  { href: '/#trade', label: 'Trade' },
-  { href: '/#contact', label: 'Contact' },
-];
+import { Logo } from '@/components/ui/Logo';
+import { CONTACT, ENTITIES, FOOTER_COLUMNS } from '@/lib/site';
 
 const LEGAL = [
-  { href: '/#contact', label: 'Terms & conditions' },
-  { href: '/#contact', label: 'Privacy policy' },
-  { href: '/#contact', label: 'Delivery' },
+  { href: '/privacy', label: 'Privacy policy' },
+  { href: '/terms', label: 'Terms' },
 ];
 
-const SOCIAL = [
-  { href: 'https://instagram.com', label: 'Instagram' },
-  { href: 'https://facebook.com', label: 'Facebook' },
-];
-
-/** Row 1: wordmark left, nav centre, social right. Row 2 above a hairline. */
+/**
+ * Sitemap §1.13 — locked template. Four columns:
+ * Explore | Products | Partner With Us | Contact & Legal.
+ *
+ * The partner email is visible in column four by design: it is one of nine
+ * sitewide surfaces carrying it, "because the relationship-driven distributor
+ * archetype bypasses forms and looks for a person."
+ *
+ * Both registered entities are shown. The strategy document treats entity
+ * transparency as a gatekeeper requirement — a family member or business partner
+ * checking legitimacy before capital moves.
+ */
 export function Footer() {
   return (
     <footer className="bg-ink-plum text-paper">
       <Container className="py-16 lg:py-20">
-        <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
-          <Link href="/" aria-label="Boogie Ice Creams, home">
-            <Wordmark tone="paper" className="text-3xl" />
-          </Link>
+        <div className="grid grid-cols-2 gap-10 lg:grid-cols-5 lg:gap-8">
+          <div className="col-span-2 lg:col-span-1">
+            <Link href="/" aria-label="Boogies Ice Cream, home">
+              {/* Full lockup — the footer is the one place with room for the
+                  tagline. The mark keeps its own colour on ink-plum: its white
+                  keyline carries it, and an alpha-derived reverse of a filled
+                  badge collapses to a featureless blob. */}
+              <Logo lockup="full" height={96} className="h-20 lg:h-24" />
+            </Link>
+          </div>
 
-          <nav aria-label="Footer">
-            <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              {NAV.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="eyebrow text-paper/80 hover:text-gold">
-                    {item.label}
+          {FOOTER_COLUMNS.map((column) => (
+            <nav key={column.heading} aria-label={column.heading}>
+              <h2 className="eyebrow text-gold">{column.heading}</h2>
+              <ul className="mt-5 flex list-none flex-col gap-3">
+                {column.links.map((link) => (
+                  <li key={link.href + link.label}>
+                    <Link href={link.href} className="text-caption text-paper/80 hover:text-gold">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+
+          <div>
+            <h2 className="eyebrow text-gold">Contact &amp; Legal</h2>
+            <ul className="mt-5 flex list-none flex-col gap-3">
+              <li>
+                <Link href="/contact" className="text-caption text-paper/80 hover:text-gold">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${CONTACT.partnerEmail}`}
+                  className="text-caption text-paper/80 hover:text-gold"
+                >
+                  {CONTACT.partnerEmail}
+                </a>
+              </li>
+              {/* One number sitewide. Rendered only once a confirmed number
+                  exists — the current estate publishes two different ones. */}
+              {CONTACT.phone && (
+                <li>
+                  <a
+                    href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
+                    className="text-caption text-paper/80 hover:text-gold"
+                  >
+                    {CONTACT.phone}
+                  </a>
+                </li>
+              )}
+              {LEGAL.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-caption text-paper/80 hover:text-gold">
+                    {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </nav>
-
-          <ul className="flex items-center gap-6">
-            {SOCIAL.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="eyebrow text-paper/80 hover:text-gold"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-4 border-t border-paper/20 pt-8 text-caption text-paper/60 lg:flex-row lg:justify-between">
-          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {LEGAL.map((item) => (
-              <li key={item.label}>
-                <Link href={item.href} className="hover:text-gold">
-                  {item.label}
-                </Link>
+        <div className="mt-14 flex flex-col gap-4 border-t border-paper/20 pt-8 text-caption text-paper/60 lg:flex-row lg:items-center lg:justify-between">
+          <ul className="flex list-none flex-col gap-1 sm:flex-row sm:gap-6">
+            {ENTITIES.map((entity) => (
+              <li key={entity.name}>
+                {entity.name} · {entity.state}
               </li>
             ))}
           </ul>
-          <p>© {new Date().getFullYear()} Boogie Ice Creams</p>
+          <p>© {new Date().getFullYear()} Boogies Ice Cream</p>
         </div>
       </Container>
     </footer>

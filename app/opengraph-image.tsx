@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Boogie Ice Creams — small batch ice cream, sorbet and desserts';
+export const alt = 'Boogies Ice Cream — small batch ice cream, sorbet and desserts';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -29,8 +29,18 @@ export default function OpengraphImage() {
             background: '#D2A65A',
           }}
         />
-        <div style={{ fontSize: 108, color: '#7C1F45', fontStyle: 'italic', display: 'flex' }}>
-          boogie
+        <div style={{ fontSize: 104, color: '#4A2214', display: 'flex' }}>Boogies</div>
+        <div
+          style={{
+            marginTop: 8,
+            fontSize: 34,
+            letterSpacing: 12,
+            textTransform: 'uppercase',
+            color: '#7C4A32',
+            display: 'flex',
+          }}
+        >
+          Ice Cream
         </div>
         <div
           style={{

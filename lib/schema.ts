@@ -31,6 +31,10 @@ export const ProductSchema = z.object({
   category: z.enum(CATEGORIES),
   flavourNotes: z.array(z.string()).min(1).max(4),
   badges: z.array(z.enum(['award-winner', 'new', 'seasonal', 'vegan'])).default([]),
+  /** Sitemap §4.7 — the CMS exclusivity flag. Where set, the SKU page states
+   *  plainly that the line is not available to general retail, which is what
+   *  protects the partner-margin argument from being undercut by confusion. */
+  exclusive: z.boolean().optional(),
   variants: z.array(VariantSchema).min(1),
   images: z.array(ProductImageSchema).min(1),
   ingredients: z.string(),
@@ -106,13 +110,26 @@ export function parseCatalogQuery(raw: Record<string, string | string[] | undefi
 }
 
 /** Shared client + server validation for the trade form. PRD §5.1 row 10. */
+/**
+ * The light gate from sitemap §2.5 — "phone + WhatsApp + territory" — and no
+ * more. The old shape asked a UK deli for its business type and a ten-character
+ * message; this asks the three things that qualify an Indian trade enquiry.
+ *
+ * `interest` mirrors the five-way partner router exactly (strategy Decision 1),
+ * so a visitor who self-sorted in the trade entry strip arrives here with the
+ * first question already answered.
+ *
+ * Email is optional on purpose: the archetype this form exists for is
+ * phone-first and will abandon on a required email.
+ */
 export const TradeEnquirySchema = z.object({
   name: z.string().min(2, 'Enter your name'),
-  business: z.string().min(2, 'Enter your business name'),
-  businessType: z.enum(['deli', 'farm-shop', 'restaurant', 'hotel', 'other']),
-  email: z.string().email('That email address is missing something'),
-  phone: z.string().min(6, 'Enter a phone number we can reach you on').optional().or(z.literal('')),
-  message: z.string().min(10, 'Tell us a little more — 10 characters or so'),
+  phone: z.string().min(6, 'Enter a phone number we can reach you on'),
+  whatsapp: z.string().optional().or(z.literal('')),
+  district: z.string().min(2, 'Which district or town would you cover?'),
+  interest: z.enum(['distributor', 'retailer', 'van-route', 'franchise', 'bulk-events']),
+  email: z.string().email('That email address is missing something').optional().or(z.literal('')),
+  message: z.string().optional().or(z.literal('')),
 });
 
 export type TradeEnquiry = z.infer<typeof TradeEnquirySchema>;

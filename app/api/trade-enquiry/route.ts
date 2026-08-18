@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     return Response.json({ ok: true, delivered: false });
   }
 
-  const { name, business, businessType, email, phone, message } = parsed.data;
+  const { name, phone, whatsapp, district, interest, email, message } = parsed.data;
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -43,17 +43,19 @@ export async function POST(req: Request) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Boogie Ice Creams <trade@boogieicecreams.com>',
+      from: 'Boogies Ice Cream <trade@boogieicecreams.com>',
       to: [to],
-      reply_to: email,
-      subject: `Trade enquiry — ${business}`,
+      ...(email ? { reply_to: email } : {}),
+      subject: `${interest} enquiry — ${district}`,
       text: [
         `Name: ${name}`,
-        `Business: ${business} (${businessType})`,
-        `Email: ${email}`,
-        `Phone: ${phone || '—'}`,
+        `Interest: ${interest}`,
+        `District / territory: ${district}`,
+        `Phone: ${phone}`,
+        `WhatsApp: ${whatsapp || 'same as phone'}`,
+        `Email: ${email || '—'}`,
         '',
-        message,
+        message || '(no message)',
       ].join('\n'),
     }),
   });
