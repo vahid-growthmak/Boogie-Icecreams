@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { ButtonLink } from '@/components/ui/Button';
@@ -32,10 +33,21 @@ export function RangeByFreezer() {
         <ul className="mt-14 grid list-none grid-cols-1 gap-px bg-cocoa/10 sm:grid-cols-2 lg:grid-cols-3">
           {TIERS.map((tier, i) => (
             <Reveal as="li" key={tier.href} delayIndex={i % 3} className="bg-paper">
-              <Link href={tier.href} className="group flex h-full flex-col p-8 hover:bg-sand/50">
-                <h3 className="text-h3 group-hover:text-ink-plum">{tier.label}</h3>
-                <p className="mt-3 flex-1 text-body text-cocoa">{tier.role}</p>
-                <span className="eyebrow mt-6 text-mulberry">View tier →</span>
+              <Link href={tier.href} className="group flex h-full flex-col hover:bg-sand/50">
+                <div className="relative aspect-4/3 overflow-hidden">
+                  <Image
+                    src={tier.image}
+                    alt={tier.imageAlt}
+                    fill
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-103"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-8">
+                  <h3 className="text-h3 group-hover:text-ink-plum">{tier.label}</h3>
+                  <p className="mt-3 flex-1 text-body text-cocoa">{tier.role}</p>
+                  <span className="eyebrow mt-6 text-mulberry">View tier →</span>
+                </div>
               </Link>
             </Reveal>
           ))}

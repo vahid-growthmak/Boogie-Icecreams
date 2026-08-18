@@ -69,35 +69,53 @@ export const PARTNER_JOURNEYS = [
  *
  * `role` is the shelf/margin consequence the sitemap demands in §1.5: "Translate
  * every product fact into a shelf or margin consequence."
+ *
+ * `image` is INTERIM STOCK, not Boogies product — see
+ * public/images/stock/SOURCES.json. The sitemap forbids stock for the plant and
+ * for priced packshots; a format tier is a category, not a product claim, so it
+ * stands in here until the shoot. Every file was inspected first: candidates
+ * showing third-party branding or a real named shop were rejected.
  */
 export const TIERS = [
   {
     href: '/products/carry-homes',
+    image: '/images/stock/tier-carry-homes.webp',
+    imageAlt: 'Chocolate and vanilla ice cream in an open tub',
     label: 'Carry homes',
     role: 'The family purchase. Highest basket value, slowest rotation.',
   },
   {
     href: '/products/paper-packs',
+    image: '/images/stock/tier-paper-packs.webp',
+    imageAlt: 'A single serving of ice cream in a paper cup',
     label: 'Paper packs',
     role: 'Entry price point. The line that keeps a cabinet turning over.',
   },
   {
     href: '/products/bulk-party-packs',
+    image: '/images/stock/tier-bulk-party.webp',
+    imageAlt: 'Trays of different flavours in an open display freezer',
     label: 'Bulk & party packs',
     role: 'Volume per delivery. Where the bulk price ladder lives.',
   },
   {
     href: '/products/novelties',
+    image: '/images/stock/tier-novelties.webp',
+    imageAlt: 'Assorted ice cream bars laid out on a tray',
     label: 'Novelties',
     role: 'Impulse at the counter. Fastest rotation, smallest footprint.',
   },
   {
     href: '/products/boogie-woogie',
+    image: '/images/stock/tier-boogie-woogie.webp',
+    imageAlt: 'Mixed fruit ice pops resting on crushed ice',
     label: 'Boogie Woogie',
     role: 'The exclusive line. Stocked only through Boogies outlets.',
   },
   {
     href: '/products/trade-supply',
+    image: '/images/stock/tier-trade-supply.webp',
+    imageAlt: 'A pile of empty wafer cones seen from above',
     label: 'Trade supply',
     role: 'Vans, cones and ghee — the lines that are invisible today.',
   },

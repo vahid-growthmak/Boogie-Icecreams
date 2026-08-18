@@ -1,0 +1,56 @@
+{
+  "status": "INTERIM STOCK \u2014 replace on the photo shoot.",
+  "why": "Sitemap \u00a71.2 and \u00a74.3 require real photography of the Boogies plant and product, and forbid stock. These stand in only where a section would otherwise be empty. No stock is used for the plant (\u00a71.6) or as a product packshot on a priced SKU.",
+  "license": "Pexels License \u2014 free for commercial use, no attribution required.",
+  "screened": "Every candidate was rendered and inspected before use. Three were rejected for showing third-party branding (Halo Top, Nisto Family) or a real named business (Tropical Scoop).",
+  "images": [
+    {
+      "file": "/images/stock/tier-carry-homes.webp",
+      "alt": "Chocolate and vanilla ice cream in an open tub, seen from above",
+      "pexelsId": 11501480,
+      "page": "https://www.pexels.com/photo/11501480/"
+    },
+    {
+      "file": "/images/stock/tier-paper-packs.webp",
+      "alt": "A single serving of strawberry ice cream in a paper cup",
+      "pexelsId": 7886445,
+      "page": "https://www.pexels.com/photo/7886445/"
+    },
+    {
+      "file": "/images/stock/tier-bulk-party.webp",
+      "alt": "Trays of different ice cream flavours in an open display freezer",
+      "pexelsId": 8713076,
+      "page": "https://www.pexels.com/photo/8713076/"
+    },
+    {
+      "file": "/images/stock/tier-novelties.webp",
+      "alt": "Assorted ice cream bars and novelties laid out on a tray",
+      "pexelsId": 10281286,
+      "page": "https://www.pexels.com/photo/10281286/"
+    },
+    {
+      "file": "/images/stock/tier-boogie-woogie.webp",
+      "alt": "Mixed fruit ice pops resting on crushed ice",
+      "pexelsId": 37220988,
+      "page": "https://www.pexels.com/photo/37220988/"
+    },
+    {
+      "file": "/images/stock/tier-trade-supply.webp",
+      "alt": "A pile of empty wafer cones seen from above",
+      "pexelsId": 787666,
+      "page": "https://www.pexels.com/photo/787666/"
+    },
+    {
+      "file": "/images/stock/bulk-events.webp",
+      "alt": "A dessert spread laid out on a table at an outdoor gathering",
+      "pexelsId": 38692610,
+      "page": "https://www.pexels.com/photo/38692610/"
+    },
+    {
+      "file": "/images/stock/where-we-sell.webp",
+      "alt": "A busy street of small shops in Kochi, Kerala",
+      "pexelsId": 17220793,
+      "page": "https://www.pexels.com/photo/17220793/"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { ButtonLink } from '@/components/ui/Button';
@@ -63,10 +64,22 @@ export function WhereWeSell() {
                 ))}
               </ul>
             ) : (
-              <div className="flex h-full min-h-64 flex-col items-center justify-center gap-4 border border-dashed border-cocoa/25 p-10 text-center">
-                <Pin className="size-8 text-cocoa-60" />
-                <p className="max-w-sm text-caption text-cocoa-60">
-                  District pages and outlet counts render here once the locator data is in the CMS.
+              /* Interim stock, and deliberately a street rather than a shopfront:
+                 a photograph of an identifiable third-party shop under this
+                 heading would imply that business stocks Boogies. */
+              <div>
+                <div className="relative aspect-4/3">
+                  <Image
+                    src="/images/stock/where-we-sell.webp"
+                    alt="A street of small shops in Kochi, Kerala"
+                    fill
+                    sizes="(min-width:1024px) 58vw, 92vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-4 flex items-start gap-2 text-caption text-cocoa-60">
+                  <Pin className="mt-0.5 size-4 shrink-0" />
+                  District pages and outlet counts appear here once the locator data is in the CMS.
                   Counts are omitted rather than estimated.
                 </p>
               </div>
