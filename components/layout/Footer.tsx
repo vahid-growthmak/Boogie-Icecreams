@@ -25,8 +25,8 @@ export function Footer() {
   return (
     <footer className="bg-brand-brown text-paper">
       <Container className="py-16 lg:py-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-5 lg:gap-8">
-          <div className="col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-5 lg:gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" aria-label="Boogies Ice Cream, home">
               {/* Full lockup — the footer is the one place with room for the
                   tagline. The mark keeps its own colour on ink-plum: its white

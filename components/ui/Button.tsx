@@ -33,16 +33,19 @@ const variants: Record<Variant, string> = {
   primary: 'bg-brand-brown px-7 py-4 text-paper hover:bg-berry',
   ghost:
     'border border-brand-brown/25 px-7 py-4 text-brand-brown hover:border-brand-brown',
-  /* The underline must stay tight to the text, so the 48px touch target is an
-     invisible ::after box centred on the link rather than real padding. */
+  /* Two things here. The 48px touch target is an invisible ::after box rather
+     than padding, so the underline stays tight to the text. And `self-start`
+     stops the link stretching: in a `flex flex-col` stack the default
+     align-items:stretch made it full width, dragging its bottom border right
+     across the container and reading as a broken rule rather than a link. */
   link:
-    'relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-brand-brown/35 px-0 pb-1 text-brand-brown hover:border-brand-brown hover:translate-y-0',
+    'self-start relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-brand-brown/35 px-0 pb-1 text-brand-brown hover:border-brand-brown hover:translate-y-0',
   /* On a brown ground. */
   accent: 'bg-berry px-7 py-4 text-paper hover:bg-cream hover:text-brand-brown',
   /* On a berry or brown ground — inverts to the cream pill. */
   contrast: 'bg-cream px-7 py-4 text-brand-brown hover:bg-brand-brown hover:text-paper',
   'link-dark':
-    'relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-berry/50 px-0 pb-1 text-berry hover:border-berry hover:translate-y-0',
+    'self-start relative after:absolute after:inset-x-0 after:top-1/2 after:h-12 after:-translate-y-1/2 after:content-[""] rounded-none border-b border-berry/50 px-0 pb-1 text-berry hover:border-berry hover:translate-y-0',
 };
 
 type ButtonProps = {
