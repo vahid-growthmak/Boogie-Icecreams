@@ -30,8 +30,11 @@ export function WhereWeSell() {
           <Reveal className="lg:col-span-5">
             <p className="eyebrow text-cocoa-60">Footprint</p>
             <h2 className="mt-4 text-h2">Where Boogies already sells</h2>
-            <p className="mt-6 text-body-lead text-mulberry">
-              {towns} towns across {states.join(' and ')}, supplied from one plant.
+            <p className="mt-6 flex items-baseline gap-4">
+              <span className="font-display text-numeral text-mulberry">{towns}</span>
+              <span className="max-w-[9rem] text-body text-cocoa">
+                towns across {states.join(' and ')}, supplied from one plant
+              </span>
             </p>
             <p className="mt-5 text-body text-cocoa">
               For a shopper that is where to find a tub. For a distributor it is something harder to
@@ -77,10 +80,12 @@ export function WhereWeSell() {
                     className="object-cover"
                   />
                 </div>
-                <p className="mt-4 flex items-start gap-2 text-caption text-cocoa-60">
+                <p className="figcaption mt-4 flex items-start gap-2">
                   <Pin className="mt-0.5 size-4 shrink-0" />
-                  District pages and outlet counts appear here once the locator data is in the CMS.
-                  Counts are omitted rather than estimated.
+                  <span>
+                    District pages and outlet counts appear here once the locator data is in the
+                    CMS. Counts are omitted rather than estimated.
+                  </span>
                 </p>
               </div>
             )}

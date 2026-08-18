@@ -36,7 +36,7 @@
   --text-display-l--letter-spacing: -0.01em;
   --text-display-l--font-weight: 600;
 
-  --text-h2: clamp(1.75rem, 3vw, 2.25rem);
+  --text-h2: clamp(2rem, 3.4vw, 2.875rem);
   --text-h2--line-height: 1.15;
   --text-h2--font-weight: 600;
 
@@ -44,7 +44,7 @@
   --text-h3--line-height: 1.3;
   --text-h3--font-weight: 600;
 
-  --text-body-lead: 1rem;
+  --text-body-lead: 1.0625rem;
   --text-body-lead--line-height: 1.65;
 
   --text-body: 0.9375rem;
@@ -57,6 +57,13 @@
   --text-eyebrow--line-height: 1.2;
   --text-eyebrow--letter-spacing: 0.14em;
   --text-eyebrow--font-weight: 600;
+
+  /* Figures. Facts are the argument on this site, so they get a size of their
+     own rather than being set as body copy. */
+  --text-numeral: clamp(2.75rem, 5vw, 4.25rem);
+  --text-numeral--line-height: 0.9;
+  --text-numeral--letter-spacing: -0.03em;
+  --text-numeral--font-weight: 600;
 
   /* ---- Layout ------------------------------------------------------- */
   --container-site: 1280px;
@@ -166,6 +173,28 @@
   &:focus {
     top: 1rem;
   }
+}
+
+/* An editorial index number — 01, 02 — set against a heading. Small, gold,
+   tabular so a column of them aligns on the digit rather than the glyph. */
+@utility index-num {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold);
+}
+
+/* Caption sitting under a photograph. Kept distinct from body copy so an
+   image can be annotated without the note reading as prose. */
+@utility figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  line-height: 1.45;
+  color: var(--color-cocoa-60);
+  border-left: 2px solid var(--color-gold);
+  padding-left: 0.75rem;
 }
 
 /* Horizontal scroller used by the best-sellers strip on mobile. */

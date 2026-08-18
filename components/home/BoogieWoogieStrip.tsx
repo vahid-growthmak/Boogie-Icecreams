@@ -14,8 +14,9 @@ import { Reveal } from '@/components/ui/Reveal';
  * Both framings appear because the homepage serves both audiences: the range for
  * the shopper, the exclusivity for the operator who cannot be undercut on it.
  *
- * TODO(assets): needs real Boogie Woogie packshots. The image below is the
- * generic tub placeholder.
+ * TODO(assets): needs real Boogie Woogie packshots. The image is interim stock
+ * showing fruit pops — it at least matches the line it sits beside, which the
+ * previous generic vanilla scoop did not.
  */
 export function BoogieWoogieStrip() {
   return (
@@ -25,8 +26,8 @@ export function BoogieWoogieStrip() {
           <Reveal className="lg:col-span-6">
             <div className="relative aspect-4/3 bg-sand/60">
               <Image
-                src="/images/products/tub-scoop.webp"
-                alt="The Boogie Woogie natural pops and scoops line"
+                src="/images/stock/boogie-woogie-strip.webp"
+                alt="Citrus ice pops with slices of lemon and orange"
                 fill
                 sizes="(min-width:1024px) 50vw, 92vw"
                 className="object-cover"
@@ -35,8 +36,8 @@ export function BoogieWoogieStrip() {
           </Reveal>
 
           <Reveal className="lg:col-span-6" delayIndex={1}>
-            <p className="eyebrow text-cocoa-60">Boogie Woogie</p>
-            <h2 className="mt-4 text-h2">Natural pops &amp; scoops</h2>
+            <p className="index-num">Boogie Woogie</p>
+            <h2 className="mt-5 text-h2">Natural pops &amp; scoops</h2>
             <p className="mt-6 text-body-lead text-mulberry">
               The natural line, sold only through Boogies outlets and franchises.
             </p>

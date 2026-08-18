@@ -36,8 +36,8 @@ export function BulkEvents() {
           </div>
 
           <div className="lg:col-span-7">
-            <p className="eyebrow text-cocoa-60">Bulk &amp; events</p>
-            <h2 className="mt-4 text-h2">Ordering for a crowd?</h2>
+            <p className="index-num">Bulk &amp; events</p>
+            <h2 className="mt-5 text-h2">Ordering for a crowd?</h2>
             <p className="mt-5 text-body text-cocoa">
               Party packs and bulk tubs go out to weddings, canteens, functions and shops running an
               event. Tell us the date, the headcount and where it is going.

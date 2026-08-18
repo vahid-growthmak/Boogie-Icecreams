@@ -11,10 +11,13 @@ import { PROOF } from '@/lib/site';
  * "Third-party verification placed before any brand claim, because the strongest
  * asset Boogies owns is evidence it did not author."
  *
- * The note is a hard rule: "Real verified figures only... If the figure is not
- * current at build, the block is OMITTED rather than estimated." That is
- * enforced here rather than left to a reviewer — with PROOF.rating null this
- * component renders nothing at all.
+ * If it is the strongest asset it cannot be a thin strip of 13px text, which is
+ * what it was. The rating is set at display scale and the band is given real
+ * height, because this is the one number on the page a sceptical distributor can
+ * go and check for himself.
+ *
+ * The omission rule is enforced in code, not left to a reviewer: with
+ * PROOF.rating null this component renders nothing rather than a stale figure.
  */
 export function ProofBar() {
   const { rating, reviews, verifiedOn, profileUrl } = PROOF;
@@ -25,46 +28,55 @@ export function ProofBar() {
     year: 'numeric',
   });
 
-  const figure = (
-    <span className="flex items-baseline gap-2">
-      <span className="font-display text-display-l leading-none text-gold">{rating}</span>
-      <span className="text-body text-paper/70">/ 5</span>
-    </span>
-  );
-
   return (
     <section className="bg-ink-plum text-paper">
-      <Container className="py-14 lg:py-16">
-        <Reveal className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-6">
-            {profileUrl ? (
-              <Link href={profileUrl} rel="noreferrer noopener" target="_blank">
-                {figure}
-              </Link>
-            ) : (
-              figure
-            )}
-            <div>
-              <span aria-hidden="true" className="flex gap-1 text-gold">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} className="size-4" />
-                ))}
-              </span>
-              <p className="mt-2 text-caption text-paper/75">
-                {reviews} Google reviews · verified {verified}
-              </p>
+      <Container className="py-16 lg:py-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+          <Reveal className="lg:col-span-4">
+            <p className="index-num">Verified</p>
+            <div className="mt-4 flex items-baseline gap-3">
+              <span className="font-display text-numeral text-gold">{rating}</span>
+              <span className="text-body text-paper/60">out of 5</span>
             </div>
-          </div>
+            <span aria-hidden="true" className="mt-4 flex gap-1.5 text-gold">
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star key={i} className="size-5" />
+              ))}
+            </span>
+            <p className="mt-4 text-caption text-paper/70">
+              {reviews} Google reviews · checked {verified}
+            </p>
+          </Reveal>
 
-          <p className="max-w-xl text-body-lead text-paper/90">
-            The highest-rated manufacturer listing in the category, on the joint-highest review
-            volume. Several of those reviews describe a tour of the plant.
-          </p>
-
-          <Link href="/plant" className="eyebrow shrink-0 border-b border-gold/50 pb-1 text-gold">
-            See the plant →
-          </Link>
-        </Reveal>
+          <Reveal className="lg:col-span-8 lg:border-l lg:border-paper/20 lg:pl-12" delayIndex={1}>
+            <p className="text-h2 text-paper">
+              The highest-rated manufacturer listing in the category, on the joint-highest review
+              volume.
+            </p>
+            <p className="mt-6 max-w-2xl text-body text-paper/75">
+              Boogies did not write any of it. Several of those reviews were left by people who had
+              just been walked round the plant — which is an invitation this site repeats rather
+              than a claim it makes.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+              <Link href="/plant" className="eyebrow border-b border-gold/50 pb-1 text-gold">
+                See the plant →
+              </Link>
+              {/* Linked only when a real profile URL exists. An unlinked verified
+                  figure is honest; a wrong link is not. */}
+              {profileUrl && (
+                <a
+                  href={profileUrl}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className="eyebrow border-b border-paper/30 pb-1 text-paper/80"
+                >
+                  Read them on Google →
+                </a>
+              )}
+            </div>
+          </Reveal>
+        </div>
       </Container>
     </section>
   );
