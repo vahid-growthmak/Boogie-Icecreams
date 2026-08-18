@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { DripEdge } from '@/components/ui/DripEdge';
@@ -71,14 +73,28 @@ export function PlantInMotion() {
               </div>
             ) : (
               <>
-                {/* Deliberately an empty frame, not a fake one. */}
-                <div className="flex aspect-video items-center justify-center rounded-card border-2 border-dashed border-brand-brown/20 bg-tint-1">
-                  <Play className="size-12 text-brand-brown/25" />
+                <div className="relative aspect-video overflow-hidden rounded-card bg-tint-1">
+                  <Image
+                    src="/images/stock/plant-line.webp"
+                    alt="Chilled dairy production on stainless racks — illustrative, not the Boogies plant"
+                    fill
+                    sizes="(min-width:1024px) 58vw, 92vw"
+                    className="object-cover"
+                  />
+                  <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-chip bg-cream/90 px-4 py-2 text-caption text-brand-brown">
+                    <Play className="size-4" />
+                    Filmed tour coming
+                  </span>
                 </div>
+                {/* The caption is load-bearing, not decoration. This section
+                    invites a distributor to visit Kannamangalam, so the one
+                    thing the page must not do is let a stock frame pass as the
+                    facility. Deleting this line turns an illustration into a
+                    false claim about a real place. */}
                 <p className="figcaption mt-4">
-                  Reserved for the filmed plant tour. No stock or generated footage stands in for
-                  the facility — several of the Google reviews above were written by people who had
-                  just been walked round it, and they would notice.
+                  Stock image, not the Boogies plant. The filmed tour is shot on site — several of
+                  the Google reviews above were written by people who had just been walked round
+                  the real facility.
                 </p>
               </>
             )}
