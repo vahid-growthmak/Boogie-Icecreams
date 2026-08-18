@@ -21,9 +21,32 @@
   --color-white: #ffffff;
   --color-black: #111111;
 
+  /* ---- Playful set (prototype) --------------------------------------
+   * Sampled from the Boogies badge itself rather than from the reference
+   * site: `brand-brown` is the shield fill, `berry` is the "Creamy… &
+   * Delicious…" tagline. Both already belong to the mark, so the warmer,
+   * rounder treatment agrees with the logo instead of fighting it.
+   * Scoped to the hero and the range section while this is a prototype. */
+  --color-brand-brown: #4a2214;
+  --color-brand-brown-soft: #7c4a32;
+  --color-berry: #e8258f;
+  --color-cream: #fdf7ee;
+
+  /* Per-tier tints. One row, one tint — the reference's flavour list device. */
+  --color-tint-1: #fdeed2;
+  --color-tint-2: #fde3ec;
+  --color-tint-3: #efe3da;
+  --color-tint-4: #e6efdc;
+  --color-tint-5: #e2eef2;
+  --color-tint-6: #f7e7d5;
+
   /* ---- Type families ------------------------------------------------ */
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  /* Rounded geometric sans for the playful surfaces. Chosen because the
+     badge's own "Boogies" lettering is soft and rounded — Fraunces never
+     matched the logo, it matched the Berry's blueprint. */
+  --font-round: var(--font-fredoka), var(--font-hanken), ui-sans-serif, sans-serif;
 
   /* ---- Type scale --------------------------------------------------- */
   --text-display-xl: clamp(3rem, 7vw, 5.75rem);
@@ -68,8 +91,13 @@
   /* ---- Layout ------------------------------------------------------- */
   --container-site: 1280px;
 
-  /* ---- Radius — deliberately flat ----------------------------------- */
+  /* ---- Radius -------------------------------------------------------
+   * The editorial surfaces stay flat — that is the PRD's position and the
+   * trade pages depend on it. The playful prototype adds its own radii
+   * rather than redefining `none`, so nothing else moves. */
   --radius-none: 0;
+  --radius-card: 1.75rem;
+  --radius-chip: 999px;
 
   /* ---- Motion ------------------------------------------------------- */
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
@@ -77,8 +105,8 @@
 
 @layer base {
   html {
-    background-color: var(--color-paper);
-    color: var(--color-cocoa);
+    background-color: var(--color-cream);
+    color: var(--color-brand-brown-soft);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
@@ -97,11 +125,12 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-display);
-    color: var(--color-mulberry);
-    /* Fraunces is a variable font and its opsz axis thins the strokes as the
-       size grows, so the display sizes read lighter than the number suggests.
-       Headings sat at 300/400 and looked unset rather than restrained. */
+    /* Rounded geometric rather than the Fraunces serif. Fraunces was chosen to
+       match the Berry's blueprint; this matches the Boogies badge, whose own
+       lettering is soft and rounded. Set once here so every heading site-wide
+       moves together — including the pages not individually restyled. */
+    font-family: var(--font-round);
+    color: var(--color-brand-brown);
     font-weight: 600;
     text-wrap: balance;
   }
@@ -172,6 +201,50 @@
   font-weight: 600;
   &:focus {
     top: 1rem;
+  }
+}
+
+/* ---- Playful prototype ---------------------------------------------- */
+
+/* Marquee track. Two identical copies translate by exactly -50%, so the loop
+   closes seamlessly without measuring anything in JavaScript. */
+@keyframes ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Rounded pill used for the sticker badges above the hero headline. */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-chip);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-round);
+  font-size: var(--text-caption);
+  line-height: 1;
+  font-weight: 500;
+}
+
+/* A drawn highlight sitting behind a word, the way the reference marks its key
+   phrase. A rounded block rather than an underline, and behind the glyphs so
+   descenders stay legible. */
+@utility marker {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  padding-inline: 0.18em;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0.06em -0.04em 0.02em;
+    z-index: -1;
+    border-radius: 0.42em;
+    background-color: var(--color-berry);
   }
 }
 

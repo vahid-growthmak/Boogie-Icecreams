@@ -1,5 +1,6 @@
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Reveal } from '@/components/ui/Reveal';
 import { FOOTPRINT } from '@/lib/site';
 
@@ -29,42 +30,44 @@ const STEPS = [
 
 export function TerritoryCta() {
   return (
-    <section className="bg-gold text-ink-plum">
+    <section className="relative overflow-hidden bg-berry text-paper">
       <Container className="py-20 lg:py-28">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-6">
-            <p className="eyebrow text-ink-plum/60">Territory check</p>
-            <h2 className="mt-6 text-display-l text-ink-plum">Is your territory still open?</h2>
-            <p className="mt-8 max-w-md text-body-lead text-ink-plum/80">
+            <span className="chip bg-paper/20 text-paper">Territory check</span>
+            <h2 className="mt-7 font-round text-display-l text-paper">Is your territory still open?</h2>
+            <p className="mt-7 max-w-md text-body-lead text-paper/85">
               Boogies already supplies {FOOTPRINT.towns} towns across{' '}
               {FOOTPRINT.states.join(' and ')}. Whether yours is one of them is a question we
               answer, not one you have to guess at.
             </p>
             <ButtonLink
               href="/partners/distributor/territory"
-              className="mt-10 bg-ink-plum text-paper hover:bg-mulberry"
+              variant="contrast"
+              className="mt-10"
             >
               Check if your territory is open
             </ButtonLink>
           </Reveal>
 
           <Reveal className="lg:col-span-6 lg:pt-4" delayIndex={1}>
-            <ol className="list-none divide-y divide-ink-plum/20 border-y border-ink-plum/20">
+            <ol className="flex list-none flex-col gap-3">
               {STEPS.map((step) => (
-                <li key={step.n} className="flex items-baseline gap-6 py-6">
-                  <span className="font-sans text-caption font-semibold tracking-[0.14em] text-ink-plum/50 tabular-nums">
+                <li key={step.n} className="flex items-baseline gap-5 rounded-card bg-paper/12 px-6 py-5">
+                  <span className="font-round text-h3 leading-none text-paper/45 tabular-nums">
                     {step.n}
                   </span>
-                  <span className="text-body text-ink-plum/90">{step.text}</span>
+                  <span className="text-body text-paper/90">{step.text}</span>
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-caption text-ink-plum/60">
+            <p className="mt-6 text-caption text-paper/70">
               One question to start. No investment figure asked for up front.
             </p>
           </Reveal>
         </div>
       </Container>
+      <DripEdge className="text-cream" />
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Reveal } from '@/components/ui/Reveal';
 
 /**
@@ -24,29 +25,29 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function Reframe() {
   return (
-    <section className="bg-ink-plum text-paper">
+    <section className="relative overflow-hidden bg-brand-brown text-paper">
       <Container className="section-y">
         <Reveal>
-          <p className="index-num">The argument</p>
-          <h2 className="mt-6 max-w-4xl text-display-xl text-paper">
+          <span className="chip bg-berry text-paper">The argument</span>
+          <h2 className="mt-7 max-w-4xl font-round text-display-xl text-paper">
             Boogies has never advertised.
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-px bg-paper/15 lg:mt-20 lg:grid-cols-2">
-          <Reveal className="bg-ink-plum lg:pr-12">
-            <p className="eyebrow text-paper/45">Read one way</p>
-            <p className="mt-5 text-h2 text-paper/45">A problem.</p>
-            <p className="mt-5 max-w-md text-body text-paper/45">
+        <div className="mt-14 grid grid-cols-1 gap-4 lg:mt-16 lg:grid-cols-2">
+          <Reveal className="rounded-card bg-paper/8 p-8 lg:p-10">
+            <span className="chip bg-paper/10 text-paper/60">Read one way</span>
+            <p className="mt-6 font-round text-h2 text-paper/55">A problem.</p>
+            <p className="mt-4 max-w-md text-body text-paper/55">
               No consumer pull behind the product, and the distributor is the one being asked to
               underwrite that risk with his own capital.
             </p>
           </Reveal>
 
-          <Reveal className="bg-ink-plum lg:pl-12" delayIndex={1}>
-            <p className="eyebrow text-gold">Read the way the order book reads</p>
-            <p className="mt-5 text-h2 text-gold">The opposite.</p>
-            <p className="mt-5 max-w-md text-body text-paper/90">
+          <Reveal className="rounded-card bg-berry/15 p-8 lg:p-10" delayIndex={1}>
+            <span className="chip bg-berry text-paper">Read the way the order book reads</span>
+            <p className="mt-6 font-round text-h2 text-berry">The opposite.</p>
+            <p className="mt-4 max-w-md text-body text-paper/90">
               Outlets across seventeen towns have reordered for years on nothing but the product
               moving off a shelf. That demand was built without spend — which is why the territory
               in front of you has not already been taken, and why what a distributor adds here
@@ -56,18 +57,18 @@ export function Reframe() {
         </div>
 
         <Reveal className="mt-14 flex flex-col gap-4 sm:flex-row">
-          <ButtonLink href="/partners/distributor" className="bg-gold text-ink-plum hover:bg-paper">
+          <ButtonLink href="/partners/distributor" variant="accent">
             Become a distributor
           </ButtonLink>
           <ButtonLink
             href="/partners/distributor/evidence"
-            variant="link"
-            className="border-gold/40 text-gold hover:border-gold"
+            variant="link-dark"
           >
             See the evidence →
           </ButtonLink>
         </Reveal>
       </Container>
+      <DripEdge className="text-berry" />
     </section>
   );
 }

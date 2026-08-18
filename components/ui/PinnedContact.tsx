@@ -48,7 +48,7 @@ export function PinnedContact() {
         <a
           href={`tel:${phone.replace(/\s/g, '')}`}
           aria-label={`Call Boogies on ${phone}`}
-          className="flex size-14 items-center justify-center rounded-full bg-ink-plum text-paper shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] transition-transform hover:scale-105"
+          className="flex size-14 items-center justify-center rounded-full bg-brand-brown text-paper shadow-[0_10px_30px_-10px_rgba(74,34,20,0.6)] transition-transform hover:scale-105"
         >
           <Phone className="size-6" />
         </a>

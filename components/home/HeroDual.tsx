@@ -1,118 +1,140 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
-import { FOOTPRINT, PLANT, TIERS } from '@/lib/site';
+import { DripEdge } from '@/components/ui/DripEdge';
+import { Ticker } from '@/components/ui/Ticker';
+import { FOOTPRINT, PLANT } from '@/lib/site';
 
 /**
- * Sitemap §1.2 — Hero, dual audience.
+ * Sitemap §1.2 — Hero, dual audience. PROTOTYPE STYLE.
  *
- * "Resolves the site's central tension in one screen: a consumer-credible brand
- * statement with an explicit trade entry above the fold."
+ * Restyled against the Scoopa reference: centred playful headline with a drawn
+ * marker behind the key phrase, sticker chips above it, pill buttons, big
+ * rounded cards and a scalloped drip edge into the next band.
  *
- * Built asymmetrically on purpose. The previous version was a 6/6 split with the
- * product centred in an empty beige box, which is the shape every generated
- * layout defaults to — two equal columns, nothing touching, no tension. Here the
- * type column is wider than the image column, the product breaks out of its
- * colour field instead of sitting inside it, and the fact row runs the full
- * width beneath both so the fold ends on evidence rather than on whitespace.
+ * The palette is pulled from the Boogies badge rather than from the reference —
+ * the shield brown carries the type, and the accent is the magenta already in
+ * the "Creamy… & Delicious…" tagline. Nothing here is borrowed from another
+ * company's brand.
  *
- * The figures are the ones the pack actually supplies. No founding date appears:
+ * What did NOT change is the argument. The sitemap still requires a trade entry
+ * above the fold, so the copy stays addressed to someone deciding whether to
+ * take a territory; only its register got warmer. No founding date appears —
  * the strategy document flags it as unreconciled.
  *
- * TODO(assets): sitemap §1.2 requires real product photography. This is the
- * inherited generated placeholder and still reads "boogie", not "Boogies".
+ * TODO(assets): §1.2 requires real product photography. Still the inherited
+ * generated placeholder, and it still reads "boogie", not "Boogies".
  */
 
-const FACTS = [
-  { figure: String(FOOTPRINT.towns), label: 'Towns supplied' },
-  { figure: String(FOOTPRINT.states.length), label: 'States' },
-  { figure: String(TIERS.length), label: 'Format tiers' },
-  { figure: '1', label: 'Plant, open 24 hours' },
+const CHIPS = [
+  { label: 'Manufacturer since day one', tone: 'bg-tint-1 text-brand-brown' },
+  { label: `${PLANT.place}`, tone: 'bg-tint-2 text-brand-brown' },
+  { label: PLANT.hours, tone: 'bg-tint-4 text-brand-brown' },
+];
+
+const TICKER = [
+  'Carry homes',
+  'Paper packs',
+  'Bulk & party packs',
+  'Novelties',
+  'Boogie Woogie',
+  'Trade supply',
+  'No preservatives',
+  'Real fruit',
 ];
 
 export function HeroDual() {
   return (
-    <section className="relative overflow-hidden pt-8 lg:pt-12">
-      <Container>
-        <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-7">
-            <p className="eyebrow text-cocoa-60">
-              Manufacturer · {PLANT.place}, {PLANT.state}
-            </p>
+    <>
+      <section className="relative overflow-hidden bg-cream pt-10 pb-20 lg:pt-16 lg:pb-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <ul className="flex list-none flex-wrap justify-center gap-2.5">
+              {CHIPS.map((chip) => (
+                <li key={chip.label} className={`chip ${chip.tone}`}>
+                  {chip.label}
+                </li>
+              ))}
+            </ul>
 
-            <h1 className="mt-7 text-display-xl">
+            <h1 className="mt-8 font-round text-display-xl text-brand-brown">
               Made in one plant.
               <br />
-              Sold in{' '}
-              <span className="relative whitespace-nowrap">
-                <span className="relative z-10">{FOOTPRINT.towns} towns.</span>
-                {/* A drawn underline rather than text-decoration: it sits behind
-                    the descenders instead of slicing through them. */}
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-[0.08em] -z-0 h-[0.14em] bg-gold"
-                />
-              </span>
+              Sold in <span className="marker text-cream">{FOOTPRINT.towns} towns.</span>
             </h1>
 
-            <p className="mt-9 max-w-xl text-body-lead text-cocoa">
-              Carry homes, paper packs, bulk, novelties and the Boogie Woogie line — every format a
-              freezer needs, from one supplier across {FOOTPRINT.states.join(' and ')}.
+            <p className="mx-auto mt-8 max-w-xl text-body-lead text-brand-brown-soft">
+              Every format a freezer needs — carry homes, paper packs, bulk, novelties and the
+              Boogie Woogie line — from one supplier across {FOOTPRINT.states.join(' and ')}.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <ButtonLink href="/partners/distributor">Become a distributor</ButtonLink>
-              <ButtonLink href="/find-boogies" variant="link">
-                Find Boogies near you →
-              </ButtonLink>
-            </div>
-          </div>
-
-          {/* The product breaks out of its field rather than sitting centred in
-              a box: the field is anchored bottom-right and the tub overhangs it. */}
-          <div className="relative lg:col-span-5">
-            <div className="relative aspect-square lg:aspect-4/5">
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-8 bottom-0 top-[18%] bg-mulberry"
-              />
-              <Image
-                src="/images/products/tub-hero.webp"
-                alt="A Boogies carry home tub"
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(min-width:1024px) 40vw, 80vw"
-                className="relative -rotate-6 scale-95 object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      </Container>
-
-      {/* Fact row. Full-bleed hairline top and bottom so the fold closes on a
-          hard edge instead of trailing off into the next band of whitespace. */}
-      <div className="mt-14 border-y border-cocoa/15 lg:mt-20">
-        <Container>
-          <dl className="grid grid-cols-2 lg:grid-cols-4">
-            {FACTS.map((fact, i) => (
-              <div
-                key={fact.label}
-                className={[
-                  'py-7 lg:py-9',
-                  i % 2 === 1 ? 'border-l border-cocoa/15 pl-6' : 'lg:border-l lg:border-cocoa/15 lg:pl-6',
-                  i < 2 ? 'border-b border-cocoa/15 lg:border-b-0' : '',
-                  i === 0 ? 'lg:border-l-0 lg:pl-0' : '',
-                ].join(' ')}
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="/partners/distributor"
+                className="chip bg-brand-brown px-7 py-4 text-paper transition-transform hover:-translate-y-0.5 hover:bg-berry"
               >
-                <dd className="font-display text-numeral text-mulberry">{fact.figure}</dd>
-                <dt className="eyebrow mt-3 text-cocoa-60">{fact.label}</dt>
+                Become a distributor
+              </Link>
+              <Link
+                href="/find-boogies"
+                className="chip border border-brand-brown/25 px-7 py-4 text-brand-brown transition-transform hover:-translate-y-0.5 hover:border-brand-brown"
+              >
+                Find Boogies near you
+              </Link>
+            </div>
+          </div>
+
+          {/* Two rounded cards with the pack overlapping the seam between them,
+              which is the reference's device for stopping a hero reading as two
+              tidy boxes side by side. */}
+          <div className="relative mx-auto mt-16 max-w-4xl">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="relative aspect-4/3 overflow-hidden rounded-card bg-tint-2">
+                <Image
+                  src="/images/stock/tier-carry-homes.webp"
+                  alt="Ice cream in an open tub"
+                  fill
+                  priority
+                  sizes="(min-width:640px) 45vw, 92vw"
+                  className="object-cover"
+                />
               </div>
-            ))}
-          </dl>
+              <div className="relative aspect-4/3 overflow-hidden rounded-card bg-tint-1">
+                <Image
+                  src="/images/stock/tier-bulk-party.webp"
+                  alt="Trays of different flavours in an open display freezer"
+                  fill
+                  sizes="(min-width:640px) 45vw, 92vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* The pack sits on the seam, breaking both cards. */}
+            <div className="pointer-events-none absolute inset-0 hidden items-center justify-center sm:flex">
+              <div className="relative size-44 lg:size-56">
+                <Image
+                  src="/images/products/tub-hero.webp"
+                  alt=""
+                  fill
+                  sizes="224px"
+                  className="-rotate-6 object-contain drop-shadow-[0_18px_28px_rgba(74,34,20,0.35)]"
+                />
+              </div>
+            </div>
+          </div>
         </Container>
+
+        {/* Melts into the ticker band below. */}
+        <DripEdge className="text-brand-brown" />
+      </section>
+
+      {/* Ticker. Carries the six formats, so it earns its place rather than
+          scrolling decoration. */}
+      <div className="bg-brand-brown py-4 text-paper">
+        <Ticker items={TICKER} />
       </div>
-    </section>
+    </>
   );
 }

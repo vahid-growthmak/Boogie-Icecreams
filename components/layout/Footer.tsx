@@ -23,7 +23,7 @@ const LEGAL = [
  */
 export function Footer() {
   return (
-    <footer className="bg-ink-plum text-paper">
+    <footer className="bg-brand-brown text-paper">
       <Container className="py-16 lg:py-20">
         <div className="grid grid-cols-2 gap-10 lg:grid-cols-5 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
@@ -38,11 +38,11 @@ export function Footer() {
 
           {FOOTER_COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
-              <h2 className="eyebrow text-gold">{column.heading}</h2>
+              <h2 className="font-round text-caption text-berry">{column.heading}</h2>
               <ul className="mt-5 flex list-none flex-col gap-3">
                 {column.links.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-caption text-paper/80 hover:text-gold">
+                    <Link href={link.href} className="text-caption text-paper/75 transition-colors hover:text-berry">
                       {link.label}
                     </Link>
                   </li>
@@ -52,17 +52,17 @@ export function Footer() {
           ))}
 
           <div>
-            <h2 className="eyebrow text-gold">Contact &amp; Legal</h2>
+            <h2 className="font-round text-caption text-berry">Contact &amp; Legal</h2>
             <ul className="mt-5 flex list-none flex-col gap-3">
               <li>
-                <Link href="/contact" className="text-caption text-paper/80 hover:text-gold">
+                <Link href="/contact" className="text-caption text-paper/75 transition-colors hover:text-berry">
                   Contact
                 </Link>
               </li>
               <li>
                 <a
                   href={`mailto:${CONTACT.partnerEmail}`}
-                  className="text-caption text-paper/80 hover:text-gold"
+                  className="text-caption text-paper/75 transition-colors hover:text-berry"
                 >
                   {CONTACT.partnerEmail}
                 </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-                    className="text-caption text-paper/80 hover:text-gold"
+                    className="text-caption text-paper/75 transition-colors hover:text-berry"
                   >
                     {CONTACT.phone}
                   </a>
@@ -81,7 +81,7 @@ export function Footer() {
               )}
               {LEGAL.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-caption text-paper/80 hover:text-gold">
+                  <Link href={link.href} className="text-caption text-paper/75 transition-colors hover:text-berry">
                     {link.label}
                   </Link>
                 </li>
@@ -90,7 +90,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-paper/20 pt-8 text-caption text-paper/60 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-paper/15 pt-8 text-caption text-paper/55 lg:flex-row lg:items-center lg:justify-between">
           <ul className="flex list-none flex-col gap-1 sm:flex-row sm:gap-6">
             {ENTITIES.map((entity) => (
               <li key={entity.name}>

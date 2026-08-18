@@ -1,5 +1,6 @@
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Play } from '@/components/ui/icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { PLANT } from '@/lib/site';
@@ -29,22 +30,22 @@ const SPEC = [
 
 export function PlantInMotion() {
   return (
-    <section className="bg-sand/50">
+    <section className="relative overflow-hidden bg-cream">
       <Container className="section-y">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-5">
-            <p className="index-num">The plant</p>
-            <h2 className="mt-5 text-h2">Come and look at it</h2>
-            <p className="mt-7 text-body-lead text-cocoa">
+            <span className="chip bg-tint-4 text-brand-brown">The plant</span>
+            <h2 className="mt-6 font-round text-h2">Come and look at it</h2>
+            <p className="mt-6 text-body-lead text-brand-brown-soft">
               Every manufacturer in this category says the same things about quality. The only
               difference worth anything is whether you are allowed through the door.
             </p>
 
-            <dl className="mt-10 divide-y divide-cocoa/15 border-y border-cocoa/15">
+            <dl className="mt-10 flex flex-col gap-2">
               {SPEC.map((row) => (
-                <div key={row.label} className="flex items-baseline justify-between gap-6 py-3.5">
-                  <dt className="eyebrow text-cocoa-60">{row.label}</dt>
-                  <dd className="text-body text-cocoa">{row.value}</dd>
+                <div key={row.label} className="flex items-baseline justify-between gap-6 rounded-[1.25rem] bg-tint-3 px-5 py-3.5">
+                  <dt className="font-round text-caption text-brand-brown-soft">{row.label}</dt>
+                  <dd className="font-round text-body text-brand-brown">{row.value}</dd>
                 </div>
               ))}
             </dl>
@@ -59,7 +60,7 @@ export function PlantInMotion() {
 
           <Reveal className="lg:col-span-7" delayIndex={1}>
             {PLANT.tourVideo ? (
-              <div className="relative aspect-video">
+              <div className="relative aspect-video overflow-hidden rounded-card">
                 <video
                   src={PLANT.tourVideo}
                   controls
@@ -71,8 +72,8 @@ export function PlantInMotion() {
             ) : (
               <>
                 {/* Deliberately an empty frame, not a fake one. */}
-                <div className="flex aspect-video items-center justify-center border border-cocoa/20 bg-paper/70">
-                  <Play className="size-12 text-cocoa/25" />
+                <div className="flex aspect-video items-center justify-center rounded-card border-2 border-dashed border-brand-brown/20 bg-tint-1">
+                  <Play className="size-12 text-brand-brown/25" />
                 </div>
                 <p className="figcaption mt-4">
                   Reserved for the filmed plant tour. No stock or generated footage stands in for
@@ -84,6 +85,7 @@ export function PlantInMotion() {
           </Reveal>
         </div>
       </Container>
+      <DripEdge className="text-tint-5" />
     </section>
   );
 }

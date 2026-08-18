@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, Hanken_Grotesk } from 'next/font/google';
+import { Fraunces, Fredoka, Hanken_Grotesk } from 'next/font/google';
 import Script from 'next/script';
 
 import { Footer } from '@/components/layout/Footer';
@@ -28,6 +28,15 @@ const hanken = Hanken_Grotesk({
   variable: '--font-hanken',
 });
 
+/** Rounded display face for the playful prototype surfaces. Variable weight,
+ *  latin only, so it costs one file. */
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: 'variable',
+  variable: '--font-fredoka',
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: { default: `${SITE_NAME} — small batch ice cream, sorbet and desserts`, template: `%s · ${SITE_NAME}` },
@@ -47,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className={`${fraunces.variable} ${hanken.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${hanken.variable} ${fredoka.variable}`}>
       <body>
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />

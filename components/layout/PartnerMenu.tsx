@@ -54,7 +54,7 @@ export function PartnerMenu({ className }: { className?: string }) {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
-        className="eyebrow inline-flex items-center gap-1.5 text-cocoa transition-colors hover:text-mulberry"
+        className="inline-flex items-center gap-1.5 font-round text-caption text-brand-brown/80 transition-colors hover:text-berry"
       >
         Partner With Us
         <Chevron className={cn('size-3.5 transition-transform', open && 'rotate-180')} />
@@ -66,11 +66,11 @@ export function PartnerMenu({ className }: { className?: string }) {
         // crawlable; the sitemap counts this dropdown as the site's primary
         // commercial surface and it must not be JS-gated for search.
         className={cn(
-          'absolute top-full left-1/2 z-50 w-80 -translate-x-1/2 pt-4 transition-opacity duration-200',
+          'absolute top-full left-1/2 z-50 w-84 -translate-x-1/2 pt-4 transition-opacity duration-200',
           open ? 'visible opacity-100' : 'invisible opacity-0',
         )}
       >
-        <ul className="list-none border border-cocoa/10 bg-paper p-2 shadow-[0_18px_50px_-24px_rgba(51,43,46,0.5)]">
+        <ul className="list-none rounded-card border border-brand-brown/10 bg-cream p-2 shadow-[0_18px_50px_-24px_rgba(74,34,20,0.45)]">
           {PARTNER_JOURNEYS.map((journey) => (
             <li key={journey.href}>
               <Link
@@ -78,19 +78,19 @@ export function PartnerMenu({ className }: { className?: string }) {
                 tabIndex={open ? undefined : -1}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'block px-4 py-3 transition-colors hover:bg-sand/70',
-                  journey.weighted && 'bg-sand/50',
+                  'block rounded-[1.25rem] px-4 py-3 transition-colors hover:bg-tint-1',
+                  journey.weighted && 'bg-tint-2',
                 )}
               >
                 <span
                   className={cn(
-                    'block font-display',
-                    journey.weighted ? 'text-h3 text-mulberry' : 'text-body text-cocoa',
+                    'block font-round',
+                    journey.weighted ? 'text-h3 text-brand-brown' : 'text-body text-brand-brown',
                   )}
                 >
                   {journey.label}
                 </span>
-                <span className="mt-0.5 block text-caption text-cocoa-60">{journey.blurb}</span>
+                <span className="mt-0.5 block text-caption text-brand-brown-soft">{journey.blurb}</span>
               </Link>
             </li>
           ))}

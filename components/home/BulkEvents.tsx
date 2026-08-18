@@ -20,11 +20,11 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function BulkEvents() {
   return (
-    <section className="border-y border-cocoa/10 bg-sand/40">
+    <section className="relative overflow-hidden bg-tint-1">
       <Container className="py-16 lg:py-20">
         <Reveal className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <div className="relative aspect-3/2">
+            <div className="relative aspect-3/2 overflow-hidden rounded-card">
               <Image
                 src="/images/stock/bulk-events.webp"
                 alt="A dessert spread laid out on a table at an outdoor gathering"
@@ -36,9 +36,9 @@ export function BulkEvents() {
           </div>
 
           <div className="lg:col-span-7">
-            <p className="index-num">Bulk &amp; events</p>
-            <h2 className="mt-5 text-h2">Ordering for a crowd?</h2>
-            <p className="mt-5 text-body text-cocoa">
+            <span className="chip bg-cream text-brand-brown">Bulk &amp; events</span>
+            <h2 className="mt-6 font-round text-h2">Ordering for a crowd?</h2>
+            <p className="mt-5 text-body text-brand-brown-soft">
               Party packs and bulk tubs go out to weddings, canteens, functions and shops running an
               event. Tell us the date, the headcount and where it is going.
             </p>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Star } from '@/components/ui/icons';
 import { Reveal } from '@/components/ui/Reveal';
 import { PROOF } from '@/lib/site';
@@ -29,16 +30,16 @@ export function ProofBar() {
   });
 
   return (
-    <section className="bg-ink-plum text-paper">
+    <section className="relative overflow-hidden bg-brand-brown text-paper">
       <Container className="py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-4">
-            <p className="index-num">Verified</p>
+            <span className="chip bg-berry text-paper">Verified</span>
             <div className="mt-4 flex items-baseline gap-3">
-              <span className="font-display text-numeral text-gold">{rating}</span>
+              <span className="font-round text-numeral text-berry">{rating}</span>
               <span className="text-body text-paper/60">out of 5</span>
             </div>
-            <span aria-hidden="true" className="mt-4 flex gap-1.5 text-gold">
+            <span aria-hidden="true" className="mt-4 flex gap-1.5 text-berry">
               {Array.from({ length: 5 }, (_, i) => (
                 <Star key={i} className="size-5" />
               ))}
@@ -48,8 +49,8 @@ export function ProofBar() {
             </p>
           </Reveal>
 
-          <Reveal className="lg:col-span-8 lg:border-l lg:border-paper/20 lg:pl-12" delayIndex={1}>
-            <p className="text-h2 text-paper">
+          <Reveal className="lg:col-span-8 lg:border-l lg:border-paper/15 lg:pl-12" delayIndex={1}>
+            <p className="font-round text-h2 text-paper">
               The highest-rated manufacturer listing in the category, on the joint-highest review
               volume.
             </p>
@@ -59,7 +60,7 @@ export function ProofBar() {
               than a claim it makes.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <Link href="/plant" className="eyebrow border-b border-gold/50 pb-1 text-gold">
+              <Link href="/plant" className="chip bg-cream text-brand-brown transition-transform hover:-translate-y-0.5">
                 See the plant →
               </Link>
               {/* Linked only when a real profile URL exists. An unlinked verified
@@ -69,7 +70,7 @@ export function ProofBar() {
                   href={profileUrl}
                   rel="noreferrer noopener"
                   target="_blank"
-                  className="eyebrow border-b border-paper/30 pb-1 text-paper/80"
+                  className="chip border border-paper/30 text-paper/85 transition-transform hover:-translate-y-0.5"
                 >
                   Read them on Google →
                 </a>
@@ -78,6 +79,7 @@ export function ProofBar() {
           </Reveal>
         </div>
       </Container>
+      <DripEdge className="text-cream" />
     </section>
   );
 }

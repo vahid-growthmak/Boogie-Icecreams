@@ -1,97 +1,99 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Reveal } from '@/components/ui/Reveal';
 import { TIERS } from '@/lib/site';
 
 /**
- * Sitemap §1.5 — "The range, by what it does for a freezer".
+ * Sitemap §1.5 — "The range, by what it does for a freezer". PROTOTYPE STYLE.
  *
- * "Reframes catalogue breadth as a logistics and margin argument rather than a
- * flavour list." Note: "Translate every product fact into a shelf or margin
- * consequence."
+ * Restyled as the reference's numbered flavour list: one row per tier, each on
+ * its own pastel tint, a large index number, a round thumbnail, and the whole
+ * row a rounded card. It maps onto the six format tiers exactly, which is why
+ * this was the right section to prototype alongside the hero — the device and
+ * the content already agreed.
  *
- * Deliberately not six identical cards. A uniform 3×2 grid says every tier
- * matters equally, which is false — the first two are where a cabinet is won and
- * where the price ladder lives — and it is the single most template-looking
- * shape on a page. So the first two run large and the remaining four run tight
- * beneath them, each numbered. The asymmetry is the hierarchy.
+ * The sitemap's rule survives the restyle intact: "Translate every product fact
+ * into a shelf or margin consequence." Each row still states what the format
+ * does to a cabinet, not what it tastes like. That is the line between borrowing
+ * a layout and borrowing a strategy.
  */
-export function RangeByFreezer() {
-  const [lead, second, ...rest] = TIERS;
 
+const TINTS = [
+  'bg-tint-1',
+  'bg-tint-2',
+  'bg-tint-3',
+  'bg-tint-4',
+  'bg-tint-5',
+  'bg-tint-6',
+] as const;
+
+export function RangeByFreezer() {
   return (
-    <section className="section-y">
+    <section className="relative overflow-hidden bg-cream pt-20 pb-24 lg:pt-24 lg:pb-32">
       <Container>
-        <Reveal className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-8">
-          <div className="lg:col-span-7">
-            <p className="eyebrow text-cocoa-60">The range</p>
-            <h2 className="mt-5 text-h2">Six formats, one delivery</h2>
-          </div>
-          <p className="max-w-lg text-body text-cocoa lg:col-span-5">
-            A cabinet does not need twelve suppliers. It needs an entry line that turns over, a
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <span className="chip bg-tint-2 text-brand-brown">The range</span>
+          <h2 className="mt-6 font-round text-h2 text-brand-brown">
+            Pick a format. The cabinet does the rest.
+          </h2>
+          <p className="mx-auto mt-5 max-w-lg text-body text-brand-brown-soft">
+            A freezer does not need twelve suppliers. It needs an entry line that turns over, a
             premium line that carries margin, and something at the counter for the walk-in.
           </p>
         </Reveal>
 
-        {/* The two that carry the argument. */}
-        <div className="mt-14 grid grid-cols-1 gap-px bg-cocoa/10 md:grid-cols-2">
-          {[lead, second].map((tier, i) => (
-            <Reveal key={tier.href} delayIndex={i} className="bg-paper">
-              <Link href={tier.href} className="group flex h-full flex-col">
-                <div className="relative aspect-3/2 overflow-hidden">
+        <ul className="mx-auto mt-14 flex max-w-4xl list-none flex-col gap-3">
+          {TIERS.map((tier, i) => (
+            <Reveal as="li" key={tier.href} delayIndex={i % 3}>
+              <Link
+                href={tier.href}
+                className={`group flex items-center gap-5 rounded-card ${TINTS[i]} p-5 transition-transform hover:-translate-y-0.5 lg:gap-8 lg:p-6`}
+              >
+                <span className="font-round text-numeral leading-none text-brand-brown/25 tabular-nums">
+                  0{i + 1}
+                </span>
+
+                <span className="min-w-0 flex-1">
+                  <span className="block font-round text-h3 text-brand-brown">{tier.label}</span>
+                  <span className="mt-1 block text-caption text-brand-brown-soft">{tier.role}</span>
+                </span>
+
+                <span className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-20">
                   <Image
                     src={tier.image}
-                    alt={tier.imageAlt}
+                    alt=""
                     fill
-                    sizes="(min-width:768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                    sizes="80px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                </div>
-                <div className="flex flex-1 items-start gap-5 p-8">
-                  <span className="index-num pt-2">0{i + 1}</span>
-                  <div>
-                    <h3 className="text-h2 group-hover:text-ink-plum">{tier.label}</h3>
-                    <p className="mt-3 max-w-sm text-body text-cocoa">{tier.role}</p>
-                  </div>
-                </div>
+                </span>
+
+                <span
+                  aria-hidden="true"
+                  className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-brand-brown text-paper transition-transform group-hover:translate-x-1 sm:flex"
+                >
+                  →
+                </span>
               </Link>
             </Reveal>
           ))}
-        </div>
+        </ul>
 
-        {/* The remaining four, tight. Image is a thumbnail, not a hero. */}
-        <div className="mt-px grid grid-cols-1 gap-px bg-cocoa/10 sm:grid-cols-2 lg:grid-cols-4">
-          {rest.map((tier, i) => (
-            <Reveal key={tier.href} delayIndex={i} className="bg-paper">
-              <Link href={tier.href} className="group flex h-full flex-col p-6">
-                <div className="flex items-center gap-4">
-                  <div className="relative size-16 shrink-0 overflow-hidden">
-                    <Image
-                      src={tier.image}
-                      alt=""
-                      fill
-                      sizes="64px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                  <span className="index-num">0{i + 3}</span>
-                </div>
-                <h3 className="mt-5 text-h3 group-hover:text-ink-plum">{tier.label}</h3>
-                <p className="mt-2 flex-1 text-caption text-cocoa-60">{tier.role}</p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-12 flex justify-start">
-          <ButtonLink href="/products" variant="ghost">
+        <Reveal className="mt-12 flex justify-center">
+          <Link
+            href="/products"
+            className="chip border border-brand-brown/25 px-7 py-4 text-brand-brown transition-transform hover:-translate-y-0.5 hover:border-brand-brown"
+          >
             See the full catalogue
-          </ButtonLink>
+          </Link>
         </Reveal>
       </Container>
+
+      {/* Melts back into the sand band of the (unrestyled) plant section. */}
+      <DripEdge className="text-sand/50" />
     </section>
   );
 }

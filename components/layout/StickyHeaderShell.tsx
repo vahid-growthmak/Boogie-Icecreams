@@ -25,7 +25,9 @@ export function StickyHeaderShell({ children }: { children: React.ReactNode }) {
     <header
       className={cn(
         'sticky top-0 z-40 transition-colors duration-300',
-        scrolled ? 'border-b border-gold/50 bg-paper' : 'border-b border-transparent bg-transparent',
+        scrolled
+          ? 'border-b border-brand-brown/12 bg-cream/95 backdrop-blur'
+          : 'border-b border-transparent bg-transparent',
       )}
     >
       {children}

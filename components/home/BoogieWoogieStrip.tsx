@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { DripEdge } from '@/components/ui/DripEdge';
 import { Reveal } from '@/components/ui/Reveal';
 
 /**
@@ -20,11 +21,11 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function BoogieWoogieStrip() {
   return (
-    <section className="section-y">
+    <section className="relative overflow-hidden bg-cream section-y">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-6">
-            <div className="relative aspect-4/3 bg-sand/60">
+            <div className="relative aspect-4/3 overflow-hidden rounded-card bg-tint-2">
               <Image
                 src="/images/stock/boogie-woogie-strip.webp"
                 alt="Citrus ice pops with slices of lemon and orange"
@@ -36,12 +37,12 @@ export function BoogieWoogieStrip() {
           </Reveal>
 
           <Reveal className="lg:col-span-6" delayIndex={1}>
-            <p className="index-num">Boogie Woogie</p>
-            <h2 className="mt-5 text-h2">Natural pops &amp; scoops</h2>
-            <p className="mt-6 text-body-lead text-mulberry">
+            <span className="chip bg-tint-2 text-brand-brown">Boogie Woogie</span>
+            <h2 className="mt-6 font-round text-h2">Natural pops &amp; scoops</h2>
+            <p className="mt-6 text-body-lead text-berry">
               The natural line, sold only through Boogies outlets and franchises.
             </p>
-            <p className="mt-5 text-body text-cocoa">
+            <p className="mt-5 text-body text-brand-brown-soft">
               For a shopper it is the range worth walking to a Tasty Point for. For an operator it is
               the part of the cabinet nobody down the road can put a price against, because nobody
               down the road is allowed to stock it.
@@ -57,6 +58,7 @@ export function BoogieWoogieStrip() {
           </Reveal>
         </div>
       </Container>
+      <DripEdge className="text-tint-1" />
     </section>
   );
 }

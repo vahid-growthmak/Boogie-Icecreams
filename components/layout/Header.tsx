@@ -37,7 +37,7 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="eyebrow text-cocoa transition-colors hover:text-mulberry"
+                  className="font-round text-caption text-brand-brown/80 transition-colors hover:text-berry"
                 >
                   {item.label}
                 </Link>
@@ -51,7 +51,7 @@ export function Header() {
               first — Decision 1, strategy §1.4. */}
           <ButtonLink
             href="/partners/distributor/territory"
-            className="hidden px-6 py-3 lg:inline-flex"
+            className="hidden lg:inline-flex"
           >
             Check your territory
           </ButtonLink>
