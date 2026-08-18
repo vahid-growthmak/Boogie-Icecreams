@@ -25,7 +25,7 @@ export function Footer() {
   return (
     <footer className="bg-brand-brown text-paper">
       <Container className="py-16 lg:py-20">
-        <div className="grid grid-cols-2 gap-10 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-5 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" aria-label="Boogies Ice Cream, home">
               {/* Full lockup — the footer is the one place with room for the
@@ -37,12 +37,12 @@ export function Footer() {
           </div>
 
           {FOOTER_COLUMNS.map((column) => (
-            <nav key={column.heading} aria-label={column.heading}>
+            <nav key={column.heading} aria-label={column.heading} className="min-w-0">
               <h2 className="font-round text-h3 text-berry">{column.heading}</h2>
-              <ul className="mt-5 flex list-none flex-col gap-3">
+              <ul className="mt-3 flex list-none flex-col lg:mt-5">
                 {column.links.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-body text-paper/80 transition-colors hover:text-berry">
+                    <Link href={link.href} className="inline-flex min-h-12 items-center text-body text-paper/80 transition-colors hover:text-berry">
                       {link.label}
                     </Link>
                   </li>
@@ -51,18 +51,18 @@ export function Footer() {
             </nav>
           ))}
 
-          <div>
+          <div className="min-w-0">
             <h2 className="font-round text-h3 text-berry">Contact &amp; Legal</h2>
-            <ul className="mt-5 flex list-none flex-col gap-3">
+            <ul className="mt-3 flex list-none flex-col lg:mt-5">
               <li>
-                <Link href="/contact" className="text-body text-paper/80 transition-colors hover:text-berry">
+                <Link href="/contact" className="inline-flex min-h-12 items-center text-body text-paper/80 transition-colors hover:text-berry">
                   Contact
                 </Link>
               </li>
               <li>
                 <a
                   href={`mailto:${CONTACT.partnerEmail}`}
-                  className="text-body text-paper/80 transition-colors hover:text-berry"
+                  className="inline-flex min-h-12 items-center text-body text-paper/80 transition-colors [overflow-wrap:anywhere] hover:text-berry"
                 >
                   {CONTACT.partnerEmail}
                 </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`tel:${CONTACT.phone.replace(/\s/g, '')}`}
-                    className="text-body text-paper/80 transition-colors hover:text-berry"
+                    className="inline-flex min-h-12 items-center text-body text-paper/80 transition-colors hover:text-berry"
                   >
                     {CONTACT.phone}
                   </a>
@@ -81,7 +81,7 @@ export function Footer() {
               )}
               {LEGAL.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-body text-paper/80 transition-colors hover:text-berry">
+                  <Link href={link.href} className="inline-flex min-h-12 items-center text-body text-paper/80 transition-colors hover:text-berry">
                     {link.label}
                   </Link>
                 </li>

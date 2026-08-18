@@ -43,7 +43,7 @@ export function Gallery({ images, productName }: { images: ProductImage[]; produ
 
       {images.length > 1 && (
         <div
-          className="mt-6 flex gap-4"
+          className="no-scrollbar -mx-4 mt-6 flex snap-x gap-3 overflow-x-auto px-4 xs:mx-0 xs:gap-4 xs:px-0"
           role="group"
           aria-label={`${productName} images`}
           onKeyDown={onKeyDown}
@@ -57,7 +57,7 @@ export function Gallery({ images, productName }: { images: ProductImage[]; produ
               aria-pressed={i === active}
               aria-label={`Show image ${i + 1} of ${images.length}: ${image.alt}`}
               className={cn(
-                'relative aspect-4/5 w-24 shrink-0 overflow-hidden border bg-white transition-colors',
+                'relative aspect-4/5 w-20 shrink-0 snap-start overflow-hidden rounded-[1rem] border bg-white transition-colors xs:w-24',
                 i === active ? 'border-mulberry' : 'border-cocoa/15 hover:border-cocoa/40',
               )}
             >

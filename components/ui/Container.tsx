@@ -1,6 +1,12 @@
 import { cn } from '@/lib/cn';
 
-/** Page width and gutters. 1280px max, 24px → 48px at lg. PRD §4.4. */
+/**
+ * Page width and gutters.
+ *
+ * The gutter steps rather than staying at 24px everywhere: 16px on a 320–375
+ * phone, where 24px each side eats 15% of the screen; 20px from 390; 24px on
+ * tablet; 48px on desktop. PRD §4.4 set the desktop figures, which are unchanged.
+ */
 export function Container({
   children,
   className,
@@ -11,7 +17,7 @@ export function Container({
   as?: 'div' | 'section' | 'header' | 'footer' | 'nav' | 'main';
 }) {
   return (
-    <Tag className={cn('mx-auto w-full max-w-(--container-site) px-6 lg:px-12', className)}>
+    <Tag className={cn('mx-auto w-full max-w-(--container-site) px-4 xs:px-5 md:px-6 lg:px-12', className)}>
       {children}
     </Tag>
   );

@@ -40,7 +40,7 @@ export function TradeEntryStrip() {
                 <h3 className="mt-6 font-round text-h2 text-paper">{primary.label}</h3>
                 <p className="mt-4 max-w-sm text-body text-paper/80">{primary.blurb}</p>
               </div>
-              <span className="mt-10 inline-block font-round text-body text-berry transition-transform group-hover:translate-x-1">
+              <span className="mt-10 inline-flex min-h-12 items-center font-round text-body text-berry transition-transform group-hover:translate-x-1">
                 Check your territory →
               </span>
             </Link>

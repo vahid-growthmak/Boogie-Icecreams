@@ -45,7 +45,7 @@ export function PlantInMotion() {
 
             <dl className="mt-10 flex flex-col gap-2">
               {SPEC.map((row) => (
-                <div key={row.label} className="flex items-baseline justify-between gap-6 rounded-[1.25rem] bg-tint-3 px-5 py-3.5">
+                <div key={row.label} className="flex flex-col gap-0.5 rounded-[1.25rem] bg-tint-3 px-5 py-3.5 xs:flex-row xs:items-baseline xs:justify-between xs:gap-6">
                   <dt className="font-round text-caption text-brand-brown-soft">{row.label}</dt>
                   <dd className="font-round text-body text-brand-brown">{row.value}</dd>
                 </div>

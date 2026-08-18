@@ -53,12 +53,12 @@ export function WhereWeSell() {
               {stats.map((stat) => (
                 <li
                   key={stat.label}
-                  className="flex items-center gap-5 rounded-card bg-cream px-6 py-5"
+                  className="flex items-center gap-4 rounded-card bg-cream px-5 py-5 xs:gap-5 xs:px-6"
                 >
-                  <span className="min-w-[2.5ch] font-round text-numeral leading-none text-berry tabular-nums">
+                  <span className="shrink-0 font-round text-numeral leading-none text-berry tabular-nums">
                     {stat.figure}
                   </span>
-                  <span>
+                  <span className="min-w-0">
                     <span className="block font-round text-h3 text-brand-brown">{stat.label}</span>
                     <span className="mt-0.5 block text-caption text-brand-brown-soft">
                       {stat.note}

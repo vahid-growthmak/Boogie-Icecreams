@@ -50,30 +50,37 @@ export function RangeByFreezer() {
             <Reveal as="li" key={tier.href} delayIndex={i % 3}>
               <Link
                 href={tier.href}
-                className={`group flex items-center gap-5 rounded-card ${TINTS[i]} p-5 transition-transform hover:-translate-y-0.5 lg:gap-8 lg:p-6`}
+                className={`group flex flex-col gap-4 rounded-card ${TINTS[i]} p-5 transition-transform hover:-translate-y-0.5 sm:flex-row sm:items-center sm:gap-6 sm:p-6 lg:gap-8`}
               >
-                <span className="font-round text-numeral leading-none text-brand-brown/25 tabular-nums">
-                  0{i + 1}
+                {/* On a phone the numeral and thumbnail share one line and the
+                    copy gets the full width beneath. Side by side, a 320px
+                    screen left the text roughly 100px and stacked it into a
+                    seven-line tower. `sm:contents` dissolves this wrapper at
+                    tablet so the children become flex items in their own right
+                    and the desktop row is unchanged. */}
+                <span className="flex items-center justify-between gap-4 sm:contents">
+                  <span className="font-round text-numeral leading-none text-brand-brown/25 tabular-nums">
+                    0{i + 1}
+                  </span>
+                  <span className="relative size-14 shrink-0 overflow-hidden rounded-full sm:order-3 sm:size-16 lg:size-20">
+                    <Image
+                      src={tier.image}
+                      alt=""
+                      fill
+                      sizes="80px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </span>
                 </span>
 
-                <span className="min-w-0 flex-1">
+                <span className="min-w-0 flex-1 sm:order-2">
                   <span className="block font-round text-h3 text-brand-brown">{tier.label}</span>
                   <span className="mt-1 block text-body text-brand-brown-soft">{tier.role}</span>
                 </span>
 
-                <span className="relative size-16 shrink-0 overflow-hidden rounded-full lg:size-20">
-                  <Image
-                    src={tier.image}
-                    alt=""
-                    fill
-                    sizes="80px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </span>
-
                 <span
                   aria-hidden="true"
-                  className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-brand-brown text-paper transition-transform group-hover:translate-x-1 sm:flex"
+                  className="hidden size-10 shrink-0 items-center justify-center rounded-full bg-brand-brown text-paper transition-transform group-hover:translate-x-1 sm:order-4 sm:flex"
                 >
                   →
                 </span>

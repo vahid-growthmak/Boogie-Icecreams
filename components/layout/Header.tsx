@@ -49,12 +49,15 @@ export function Header() {
         <div className="flex items-center gap-3">
           {/* Primary CTA A. The territory question is the one Boogies answers
               first — Decision 1, strategy §1.4. */}
-          <ButtonLink
-            href="/partners/distributor/territory"
-            className="hidden lg:inline-flex"
-          >
-            Check your territory
-          </ButtonLink>
+          {/* Wrapped rather than given `hidden` directly: ButtonLink's base
+              class carries `inline-flex`, and cn() is a plain joiner, so both
+              display utilities survived and source order won. The CTA was
+              showing on every phone and wrapping to three lines. */}
+          <div className="hidden lg:block">
+            <ButtonLink href="/partners/distributor/territory">
+              Check your territory
+            </ButtonLink>
+          </div>
           <div className="xl:hidden">
             <MobileNav />
           </div>

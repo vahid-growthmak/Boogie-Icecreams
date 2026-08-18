@@ -60,7 +60,7 @@ export function ProofBar() {
               than a claim it makes.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <Link href="/plant" className="chip bg-cream text-brand-brown transition-transform hover:-translate-y-0.5">
+              <Link href="/plant" className="chip min-h-12 bg-cream px-5 text-brand-brown transition-transform hover:-translate-y-0.5">
                 See the plant →
               </Link>
               {/* Linked only when a real profile URL exists. An unlinked verified
@@ -70,7 +70,7 @@ export function ProofBar() {
                   href={profileUrl}
                   rel="noreferrer noopener"
                   target="_blank"
-                  className="chip border border-paper/30 text-paper/85 transition-transform hover:-translate-y-0.5"
+                  className="chip min-h-12 border border-paper/30 px-5 text-paper/85 transition-transform hover:-translate-y-0.5"
                 >
                   Read them on Google →
                 </a>
