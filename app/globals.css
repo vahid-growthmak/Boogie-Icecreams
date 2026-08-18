@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* Boogie Ice Creams — design tokens. PRD §4.2–4.6.
+ * The single source of design truth. No component may introduce a literal
+ * colour, size or spacing value. See .agents/skills/boogie-design-system.
+ */
+
+@theme {
+  /* ---- Colour ------------------------------------------------------- */
+  --color-paper: #f5f1e8;
+  --color-sand: #e9e2d3;
+  --color-mulberry: #7c1f45;
+  --color-ink-plum: #3f1330;
+  --color-gold: #d2a65a;
+  --color-cocoa: #332b2e;
+  /* PRD §4.2 specifies #332B2E99 (60% alpha). Measured against --paper that is
+     3.73:1, which fails the WCAG 2.2 AA requirement in PRD §7 for the caption
+     and meta text this token carries. Raised to 75% alpha = 5.75:1. The token
+     name is kept so the PRD still reads true; only the value moved. */
+  --color-cocoa-60: #332b2ebf;
+  --color-white: #ffffff;
+  --color-black: #111111;
+
+  /* ---- Type families ------------------------------------------------ */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Type scale --------------------------------------------------- */
+  --text-display-xl: clamp(3rem, 7vw, 5.75rem);
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--font-weight: 300;
+
+  --text-display-l: clamp(2.5rem, 5vw, 3.75rem);
+  --text-display-l--line-height: 1.05;
+  --text-display-l--letter-spacing: -0.01em;
+  --text-display-l--font-weight: 300;
+
+  --text-h2: clamp(1.75rem, 3vw, 2.25rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--font-weight: 400;
+
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--font-weight: 400;
+
+  --text-body-lead: 1rem;
+  --text-body-lead--line-height: 1.65;
+
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.7;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--font-weight: 600;
+
+  /* ---- Layout ------------------------------------------------------- */
+  --container-site: 1280px;
+
+  /* ---- Radius — deliberately flat ----------------------------------- */
+  --radius-none: 0;
+
+  /* ---- Motion ------------------------------------------------------- */
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    /* Header is sticky; anchored sections must not hide beneath it. */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    /* Nothing may create horizontal scroll — offset collage blocks are clipped. */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-mulberry);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  /* Visible focus everywhere. Gold at 2px offset. PRD §7. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-mulberry);
+    color: var(--color-paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---- Utilities ------------------------------------------------------ */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Section rhythm: 96px mobile → 160px desktop. Never improvised. */
+@utility section-y {
+  padding-block: 6rem;
+  @media (width >= 1024px) {
+    padding-block: 10rem;
+  }
+}
+
+@utility section-y-sm {
+  padding-block: 4rem;
+  @media (width >= 1024px) {
+    padding-block: 6rem;
+  }
+}
+
+/* Skip link — first focusable element on every page. */
+@utility skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background-color: var(--color-ink-plum);
+  color: var(--color-paper);
+  padding: 0.75rem 1.25rem;
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 600;
+  &:focus {
+    top: 1rem;
+  }
+}
+
+/* Horizontal scroller used by the best-sellers strip on mobile. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

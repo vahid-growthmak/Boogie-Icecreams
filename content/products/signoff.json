@@ -1,0 +1,17 @@
+{
+  "note": "Client sign-off on ingredients, allergens and nutrition per PRD §10. No record may reach staging while signedOff is false.",
+  "records": {
+    "strawberries-and-cream": { "signedOff": false },
+    "madagascan-vanilla": { "signedOff": false },
+    "salted-caramel": { "signedOff": false },
+    "honeycomb": { "signedOff": false },
+    "dark-chocolate-orange": { "signedOff": false },
+    "pistachio-and-rose": { "signedOff": false },
+    "alphonso-mango-sorbet": { "signedOff": false },
+    "blood-orange-sorbet": { "signedOff": false },
+    "raspberry-sorbet": { "signedOff": false },
+    "coconut-and-lime": { "signedOff": false },
+    "dark-chocolate-oat": { "signedOff": false },
+    "sticky-toffee-pot": { "signedOff": false }
+  }
+}
