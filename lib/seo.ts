@@ -7,8 +7,35 @@ export const SITE_NAME = 'Boogies Ice Cream';
 export const SITE_DESCRIPTION =
   'Small-batch ice cream, sorbet and frozen desserts, churned slow and sold by the tub. Delivered in insulated packaging across India.';
 
+/**
+ * The site's absolute origin, and it must never return something `new URL()`
+ * will reject — metadataBase in app/layout.tsx is built from this during page
+ * data collection, so a bad value fails the whole build on /_not-found with a
+ * bare "Invalid URL" that names neither this function nor the variable.
+ *
+ * `??` was not enough: it falls back on null and undefined but not on the empty
+ * string, and an env var declared in a hosting dashboard with no value set is an
+ * empty string, not an absent one. That is exactly how this broke on Vercel.
+ */
 export function siteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return explicit.replace(/\/+$/, '');
+
+  // Vercel supplies these hosts without a scheme, and which one is correct
+  // depends on the deployment. On a preview, the stable production alias would
+  // make that preview's OG images and canonicals point at the live site — so a
+  // preview uses its own per-deployment host. Production and local builds use
+  // the stable alias, so a forgotten NEXT_PUBLIC_SITE_URL degrades to the right
+  // domain rather than to a deployment hash.
+  const preview = process.env.VERCEL_ENV === 'preview';
+  const host = (
+    (preview
+      ? (process.env.VERCEL_URL ?? process.env.VERCEL_PROJECT_PRODUCTION_URL)
+      : (process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL)) ?? ''
+  ).trim();
+  if (host) return `https://${host.replace(/^https?:\/\//, '').replace(/\/+$/, '')}`;
+
+  return 'http://localhost:3000';
 }
 
 export function absoluteUrl(path: string): string {
